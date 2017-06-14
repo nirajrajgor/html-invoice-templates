@@ -1,0 +1,39 @@
+.back{}
+.invoice-wrapper{
+	margin: 20px auto;
+	max-width: 700px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.invoice-top{
+	background-color: #f5f5f5;
+	padding: 40px 60px;
+}
+.invoice-top-left{
+	margin-top: 60px;
+}
+.invoice-top-left h2 , .invoice-top-left h6{
+	line-height: 1.5;
+}
+.client-company-name{
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+.client-address{
+	margin-top: 5px;
+}
+
+.invoice-top-right h2 , .invoice-top-right h6{
+	text-align: right;
+	line-height: 1.5;
+}
+.our-company-name{
+	font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.our-address{
+	margin-top: 0;
+}
+
+.invoice-bottom{}
