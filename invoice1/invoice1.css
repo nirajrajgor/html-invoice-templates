@@ -5,7 +5,7 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .invoice-top{
-	background-color: #f5f5f5;
+	background-color: #fafafa;
 	padding: 40px 60px;
 }
 .invoice-top-left{
@@ -13,6 +13,7 @@
 }
 .invoice-top-left h2 , .invoice-top-left h6{
 	line-height: 1.5;
+	font-family: 'Montserrat', sans-serif;
 }
 .client-company-name{
 	font-size: 20px;
@@ -21,11 +22,13 @@
 }
 .client-address{
 	margin-top: 5px;
+	color: rgba(0,0,0,0.75);
 }
 
 .invoice-top-right h2 , .invoice-top-right h6{
 	text-align: right;
 	line-height: 1.5;
+	font-family: 'Montserrat', sans-serif;
 }
 .our-company-name{
 	font-size: 16px;
@@ -34,6 +37,7 @@
 }
 .our-address{
 	margin-top: 0;
+	color: rgba(0,0,0,0.75);
 }
 
 .invoice-bottom{}
