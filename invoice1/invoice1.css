@@ -40,4 +40,17 @@
 	color: rgba(0,0,0,0.75);
 }
 
-.invoice-bottom{}
+.invoice-bottom{
+	background-color: #ffffff;
+	padding: 40px 60px;
+}
+.title{
+	font-size: 30px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.invoice-bottom-left h5, .invoice-bottom-left h4{
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-bottom-left h4{ font-weight: 400; }
