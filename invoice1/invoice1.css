@@ -54,3 +54,8 @@
 	font-family: 'Montserrat', sans-serif;
 }
 .invoice-bottom-left h4{ font-weight: 400; }
+.terms{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+	margin-top: 40px;
+}
