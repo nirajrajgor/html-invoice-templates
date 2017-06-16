@@ -15,12 +15,22 @@
 	line-height: 1.5;
 	font-family: 'Montserrat', sans-serif;
 }
+.invoice-top-left h4{
+	margin-top: 30px;
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-top-left h5{
+	line-height: 1.4;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+}
 .client-company-name{
 	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 0;
 }
 .client-address{
+	font-size: 14px;
 	margin-top: 5px;
 	color: rgba(0,0,0,0.75);
 }
@@ -36,6 +46,7 @@
     margin-bottom: 0;
 }
 .our-address{
+	font-size: 13px;
 	margin-top: 0;
 	color: rgba(0,0,0,0.75);
 }
@@ -43,6 +54,7 @@
 .invoice-bottom{
 	background-color: #ffffff;
 	padding: 40px 60px;
+	position: relative;
 }
 .title{
 	font-size: 30px;
@@ -58,4 +70,12 @@
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	margin-top: 40px;
+}
+.bottom-bar{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 26px;
+	background-color: #000;
 }
