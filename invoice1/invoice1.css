@@ -80,6 +80,12 @@
 	font-size: 14px;
 	margin-top: 40px;
 }
+
+.divider{
+	margin-top: 50px;
+    margin-bottom: 5px;
+}
+
 .bottom-bar{
 	position: absolute;
 	bottom: 0;
