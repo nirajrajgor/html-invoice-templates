@@ -44,6 +44,27 @@ body{
 	font-size: 14px;
 }
 
+.front-invoice-bottom{
+	background-color: #ffffff;
+	padding: 40px 60px;
+	position: relative;
+}
+.borderless td, .borderless th {
+    border: none !important;
+}
+.custom-table td{
+	font-size: 13px;
+    padding: 6px !important;
+    font-weight: 500;
+}
+.description{
+	line-height: 1.6;
+}
+.specs{
+	margin-top: 30px;
+	font-size: 14px;
+}
+
 .back{}
 .invoice-wrapper{
 	margin: 20px auto;
