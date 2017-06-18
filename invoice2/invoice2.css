@@ -1,0 +1,142 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+.front-invoice-wrapper{
+	margin: 20px auto;
+	max-width: 700px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.front-invoice-top{
+	background-color: #323149;
+	padding: 40px 60px;
+}
+.front-invoice-top-left h2, .front-invoice-top-right h2{
+	color: #ffffff;
+	font-size: 22px;
+	margin-bottom: 4px;
+}
+.front-invoice-top-left h3, .front-invoice-top-right h3{
+	color: rgba(255,255,255,0.7);
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+.front-invoice-top-left h5, .front-invoice-top-right h5{
+	color: rgba(255,255,255,0.7);
+	font-size: 14px;
+	font-weight: 400;
+	margin-top: 0;
+}
+
+.front-invoice-top-right{
+	text-align: right;
+}
+
+.service-name{
+	color: #ffffff;
+	font-size: 22px;
+	font-weight: 500;
+	margin-top: 60px;
+}
+.date{
+	color: rgba(255,255,255,0.8);
+	font-size: 14px;
+}
+
+.back{}
+.invoice-wrapper{
+	margin: 20px auto;
+	max-width: 700px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.invoice-top{
+	background-color: #fafafa;
+	padding: 40px 60px;
+}
+.invoice-top-left{
+	margin-top: 60px;
+}
+.invoice-top-left h2 , .invoice-top-left h6{
+	line-height: 1.5;
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-top-left h4{
+	margin-top: 30px;
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-top-left h5{
+	line-height: 1.4;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+}
+.client-company-name{
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+.client-address{
+	font-size: 14px;
+	margin-top: 5px;
+	color: rgba(0,0,0,0.75);
+}
+
+.invoice-top-right h2 , .invoice-top-right h6{
+	text-align: right;
+	line-height: 1.5;
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-top-right h5{
+	line-height: 1.4;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-align: right;
+    margin-top: 0;
+}
+.our-company-name{
+	font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.our-address{
+	font-size: 13px;
+	margin-top: 0;
+	color: rgba(0,0,0,0.75);
+}
+.logo-wrapper{ overflow: auto; }
+
+
+.invoice-bottom{
+	background-color: #ffffff;
+	padding: 40px 60px;
+	position: relative;
+}
+.title{
+	font-size: 30px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.invoice-bottom-left h5, .invoice-bottom-left h4{
+	font-family: 'Montserrat', sans-serif;
+}
+.invoice-bottom-left h4{ font-weight: 400; }
+.terms{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+	margin-top: 40px;
+}
+
+.divider{
+	margin-top: 50px;
+    margin-bottom: 5px;
+}
+
+.bottom-bar{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 26px;
+	background-color: #323149;
+}
