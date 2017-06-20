@@ -72,58 +72,41 @@ body{
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .invoice-top{
-	background-color: #fafafa;
+	background: linear-gradient(135deg, #fafafa, #eeeeee);
 	padding: 40px 60px;
 }
 .invoice-top-left{
-	margin-top: 60px;
+	/*margin-top: 60px;*/
 }
-.invoice-top-left h2 , .invoice-top-left h6{
-	line-height: 1.5;
-	font-family: 'Montserrat', sans-serif;
+.invoice-top-left h2, .invoice-top-right h2{	
+	font-size: 22px;
+	margin-bottom: 4px;
 }
-.invoice-top-left h4{
-	margin-top: 30px;
-	font-family: 'Montserrat', sans-serif;
-}
-.invoice-top-left h5{
-	line-height: 1.4;
-	font-family: 'Montserrat', sans-serif;
+.invoice-top-left h3, .invoice-top-right h3{
+	font-size: 15px;
 	font-weight: 400;
+	margin-top: 0;
+	margin-bottom: 5px;
 }
-.client-company-name{
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-.client-address{
+.invoice-top-left h5, .invoice-top-right h5{
 	font-size: 14px;
-	margin-top: 5px;
-	color: rgba(0,0,0,0.75);
+	font-weight: 400;
+	margin-top: 0;
 }
 
-.invoice-top-right h2 , .invoice-top-right h6{
-	text-align: right;
-	line-height: 1.5;
-	font-family: 'Montserrat', sans-serif;
+.invoice-top-left h4{
+	margin-top: 40px;
+	font-size: 22px;
 }
-.invoice-top-right h5{
-	line-height: 1.4;
-    font-family: 'Montserrat', sans-serif;
+.invoice-top-left h6{
+	font-size: 14px;
     font-weight: 400;
-    text-align: right;
-    margin-top: 0;
 }
-.our-company-name{
-	font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 0;
+
+.invoice-top-right h2, .invoice-top-right h3, .invoice-top-right h5{
+	text-align: right;
 }
-.our-address{
-	font-size: 13px;
-	margin-top: 0;
-	color: rgba(0,0,0,0.75);
-}
+
 .logo-wrapper{ overflow: auto; }
 
 
