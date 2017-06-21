@@ -115,21 +115,6 @@ body{
 	padding: 40px 60px;
 	position: relative;
 }
-.title{
-	font-size: 30px;
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 600;
-	margin-bottom: 30px;
-}
-.invoice-bottom-left h5, .invoice-bottom-left h4{
-	font-family: 'Montserrat', sans-serif;
-}
-.invoice-bottom-left h4{ font-weight: 400; }
-.terms{
-	font-family: 'Montserrat', sans-serif;
-	font-size: 14px;
-	margin-top: 40px;
-}
 
 .divider{
 	margin-top: 50px;
