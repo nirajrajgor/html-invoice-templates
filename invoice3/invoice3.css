@@ -1,0 +1,25 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+
+.invoice{
+	position: relative;
+}
+.bg-color{
+	background-color: red;
+	position: absolute;
+	height: 400px;  /* Addition of 100px of invoice-wrapper and min-height of invoice-top */
+	top: 0;
+    left: 0;
+    right: 0;
+}
+.invoice-wrapper{
+	margin-top: 100px;
+}
+
+.invoice-top{
+	background-color: #f5f5f5;
+	min-height: 300px;
+	max-height: 300px;
+	overflow: hidden;
+}
