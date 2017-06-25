@@ -4,9 +4,10 @@ body{
 
 .invoice{
 	position: relative;
+	background-color: #f5f5f5;
 }
 .bg-color{
-	background-color: red;
+	background-color: #5ee7df;
 	position: absolute;
 	height: 400px;  /* Addition of 100px of invoice-wrapper and min-height of invoice-top */
 	top: 0;
@@ -15,6 +16,10 @@ body{
 }
 .invoice-wrapper{
 	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 800px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .invoice-top{
@@ -22,4 +27,24 @@ body{
 	min-height: 300px;
 	max-height: 300px;
 	overflow: hidden;
+	padding: 40px 60px;
+}
+
+.invoice-bottom{
+	background-color: #ffffff;
+	padding: 40px 60px;
+}
+
+.invoice-bottom .service-title{
+	font-size: 20px;
+}
+.invoice-bottom .service-subtitle{
+	font-size: 14px;
+	color: rgba(0,0,0, 0.70);
+	font-weight: 400;
+}
+.invoice-bottom .service-price{
+	font-size: 16px;
+	color: green;
+	text-align: right;
 }
