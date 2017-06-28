@@ -9,7 +9,7 @@ body{
 .bg-color{
 	background-color: #5ee7df;
 	position: absolute;
-	height: 400px;  /* Addition of 100px of invoice-wrapper and min-height of invoice-top */
+	height: 350px;  /* Addition of 100px of invoice-wrapper and min-height of invoice-top */
 	top: 0;
     left: 0;
     right: 0;
@@ -25,8 +25,8 @@ body{
 
 .invoice-top{
 	background-color: #f5f5f5;
-	min-height: 300px;
-	max-height: 300px;
+	min-height: 250px;
+	max-height: 250px;
 	overflow: hidden;
 	padding: 40px 60px;
 }
@@ -35,20 +35,34 @@ body{
 	width: 200px;
 }
 .invoice-top-left h1{
-	font-size: 20px;
+	font-size: 24px;
 }
 .invoice-top-left h5{
 	font-size: 14px;
-	color: rgba(0,0,0,0.57);
+	color: rgba(0,0,0,0.50);
 }
 
 .invoice-top-right{
 	text-align: right;
 }
-.invoice-top-right h4{}
-.invoice-top-right h6{}
-.invoice-top-right h3{}
-.invoice-top-right .amount{}
+.invoice-top-right h4{
+	font-size: 20px;
+}
+.invoice-top-right h6{
+	color: rgba(0,0,0,0.50);
+	font-size: 14px;
+	margin-top: 15px;
+}
+.invoice-top-right h3{
+	color: rgba(0,0,0,0.50);
+	font-size: 14px;
+	margin-top: 15px;
+}
+.invoice-top-right .amount{
+	color: green;
+	font-size: 16px;
+	margin-top: 40px;
+}
 
 .invoice-bottom{
 	background-color: #ffffff;
