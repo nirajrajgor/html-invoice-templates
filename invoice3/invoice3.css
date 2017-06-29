@@ -113,3 +113,35 @@ body{
 	font-size: 18px;
 	text-align: right;
 }
+
+.footer{
+	background-color: #fafafa;
+	padding: 60px 60px;
+}
+.client-address h6{
+	color: rgba(0,0,0,0.5);
+	font-size: 16px;
+}
+.client-address h2{
+	color: #222;
+	font-size: 16px;
+}
+.client-address h4{
+	font-size: 13px;
+	color: rgba(0,0,0,0.5);
+	line-height: 1.65;
+}
+
+.our-address h6{
+	color: rgba(0,0,0,0.5);
+	font-size: 16px;
+}
+.our-address h2{
+	color: #222;
+	font-size: 16px;
+}
+.our-address h4{
+	font-size: 13px;
+	color: rgba(0,0,0,0.5);
+	line-height: 1.65;
+}
