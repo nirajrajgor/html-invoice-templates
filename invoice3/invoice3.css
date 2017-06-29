@@ -88,6 +88,9 @@ body{
 	text-align: right;
 }
 
+.sub-total, .sub-total-price{
+	margin-top: 30px !important;
+}
 .sub-total, .discount{
 	text-transform: uppercase;
 	color: rgba(0,0,0,0.5);
@@ -104,4 +107,9 @@ body{
 	text-align: right;
 	font-size: 14px;
 	color: #222;
+}
+.total-due-price{
+	color: green;
+	font-size: 18px;
+	text-align: right;
 }
