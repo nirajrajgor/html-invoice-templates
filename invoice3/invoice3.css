@@ -66,14 +66,14 @@ body{
 
 .invoice-bottom{
 	background-color: #ffffff;
-	padding: 40px 60px;
+	padding: 20px 60px 30px;
 }
 
 .invoice-bottom .service-title{
-	font-size: 20px;
+	font-size: 18px;
 }
 .invoice-bottom .service-subtitle{
-	font-size: 14px;
+	font-size: 12px;
 	color: rgba(0,0,0, 0.70);
 	font-weight: 400;
 }
@@ -95,7 +95,7 @@ body{
 	text-transform: uppercase;
 	color: rgba(0,0,0,0.5);
 	text-align: right;
-	font-size: 14px;
+	font-size: 13px;
 }
 .sub-total-price, .discount-price{
 	font-size: 16px;
@@ -105,7 +105,7 @@ body{
 }
 .total-due{
 	text-align: right;
-	font-size: 14px;
+	font-size: 13px;
 	color: #222;
 }
 .total-due-price{
@@ -120,7 +120,7 @@ body{
 }
 .client-address h6{
 	color: rgba(0,0,0,0.5);
-	font-size: 16px;
+	font-size: 15px;
 }
 .client-address h2{
 	color: #222;
@@ -130,11 +130,12 @@ body{
 	font-size: 13px;
 	color: rgba(0,0,0,0.5);
 	line-height: 1.65;
+	font-weight: 400;
 }
 
 .our-address h6{
 	color: rgba(0,0,0,0.5);
-	font-size: 16px;
+	font-size: 15px;
 }
 .our-address h2{
 	color: #222;
@@ -144,4 +145,14 @@ body{
 	font-size: 13px;
 	color: rgba(0,0,0,0.5);
 	line-height: 1.65;
+	font-weight: 400;
+}
+
+.note h6{
+	color: rgba(0,0,0,0.5);
+	font-size: 15px;
+}
+.note p{
+	color: rgba(0,0,0,0.5);
+	margin-top: 20px;
 }
