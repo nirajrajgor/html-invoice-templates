@@ -156,3 +156,13 @@ body{
 	color: rgba(0,0,0,0.5);
 	margin-top: 20px;
 }
+.payment{
+	background-color: #2196F3;
+	padding: 20px;
+}
+.payment h3{
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+.payment h3 a{ color: #fff; }
