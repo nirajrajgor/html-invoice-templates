@@ -8,6 +8,9 @@
 	background-color: #fafafa;
 	padding: 40px 60px;
 }
+/*
+Invoice-top-left refers to the client name & address, service provided
+*/
 .invoice-top-left{
 	margin-top: 60px;
 }
@@ -35,6 +38,9 @@
 	color: rgba(0,0,0,0.75);
 }
 
+/*
+Invoice-top-right refers to the our name & address, logo and date
+*/
 .invoice-top-right h2 , .invoice-top-right h6{
 	text-align: right;
 	line-height: 1.5;
