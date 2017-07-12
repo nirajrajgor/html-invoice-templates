@@ -65,7 +65,9 @@ Invoice-top-right refers to the our name & address, logo and date
 }
 .logo-wrapper{ overflow: auto; }
 
-
+/*
+Invoice-bottom refers to the bottom part of invoice template
+*/
 .invoice-bottom{
 	background-color: #ffffff;
 	padding: 40px 60px;
@@ -77,21 +79,27 @@ Invoice-top-right refers to the our name & address, logo and date
 	font-weight: 600;
 	margin-bottom: 30px;
 }
+/*
+Invoice-bottom-left
+*/
 .invoice-bottom-left h5, .invoice-bottom-left h4{
 	font-family: 'Montserrat', sans-serif;
 }
-.invoice-bottom-left h4{ font-weight: 400; }
+.invoice-bottom-left h4{
+	font-weight: 400;
+}
 .terms{
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	margin-top: 40px;
 }
-
 .divider{
 	margin-top: 50px;
     margin-bottom: 5px;
 }
-
+/*
+bottom-bar is colored bar located at bottom of invoice-card
+*/
 .bottom-bar{
 	position: absolute;
 	bottom: 0;
