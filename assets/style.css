@@ -1,0 +1,19 @@
+h1{
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+.invoice-item-wrapper{
+	text-align: center;
+	margin-bottom: 20px;
+}
+.invoice-item-wrapper img{
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+	margin-bottom: 30px;
+}
+.invoice-item-wrapper a{
+	padding: 10px 20px;
+	margin-right: 20px;
+	color: #333;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+}
