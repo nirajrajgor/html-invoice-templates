@@ -6,6 +6,10 @@ h1{
 	text-align: center;
 	margin-bottom: 20px;
 }
+.invoice-item-wrapper h2{
+	font-size: 20px;
+	margin-bottom: 20px;	
+}
 .invoice-item-wrapper img{
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 	margin-bottom: 30px;
@@ -14,6 +18,6 @@ h1{
 	padding: 10px 20px;
 	margin-right: 20px;
 	color: #333;
-	border: 1px solid #ddd;
+	border: 2px solid #ddd;
 	border-radius: 20px;
 }
