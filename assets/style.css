@@ -21,3 +21,11 @@ h1{
 	border: 2px solid #ddd;
 	border-radius: 20px;
 }
+.github-btn{
+	padding: 10px 20px;
+	border: 2px solid #ddd;
+	color: #333;
+	float: right;
+	border-radius: 20px;
+	font-size: 15px;
+}
