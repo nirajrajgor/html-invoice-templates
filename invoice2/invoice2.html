@@ -43,6 +43,13 @@
 			<label>Tax %
 				<input type="number" id="taxPct" value="0" min="0" step="0.5">
 			</label>
+			<label>Export
+				<select id="printScope">
+					<option value="both">Proposal + Invoice</option>
+					<option value="invoice">Invoice only</option>
+					<option value="proposal">Proposal only</option>
+				</select>
+			</label>
 			<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
 		</div>
 	</div>
@@ -359,11 +366,21 @@
 			reformatRates();
 			recalc();
 		});
+
+		// choose what gets exported: the proposal page, the invoice page, or both
+		var printScope = document.getElementById('printScope');
+		function applyScope(){
+			document.body.classList.remove('print-both', 'print-invoice', 'print-proposal');
+			document.body.classList.add('print-' + printScope.value);
+		}
+		printScope.addEventListener('change', applyScope);
+
 		document.getElementById('savePdf').addEventListener('click', function(){
 			window.print();
 		});
 
 		// --- init ---
+		applyScope();
 		reformatRates();
 		recalc();
 	})();

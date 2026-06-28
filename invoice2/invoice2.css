@@ -297,4 +297,10 @@ body{
 	.row-delete, .add-row{ display: none !important; }
 	[contenteditable="true"]:hover,
 	[contenteditable="true"]:focus{ background: none !important; box-shadow: none !important; }
+
+	/* this template bundles two documents (proposal + invoice) — export the
+	   one you want, or both as a clean 2-page PDF */
+	body.print-invoice .front{ display: none !important; }
+	body.print-proposal .back{ display: none !important; }
+	body.print-both .back{ page-break-before: always; }
 }
