@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Dynamic Invoice</title>
+
+	<!-- Bootstrap cdn 3.3.7 (same as invoice1) -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Custom font Montserrat (same as invoice1) -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+
+	<style>
+	/* ===================================================================
+	   ORIGINAL invoice1.css — copied verbatim, design unchanged
+	   =================================================================== */
+	.back{}
+	.invoice-wrapper{
+		margin: 20px auto;
+		max-width: 700px;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+	.invoice-top{
+		background-color: #fafafa;
+		padding: 40px 60px;
+	}
+	.invoice-top-left{ margin-top: 60px; }
+	.invoice-top-left h2 , .invoice-top-left h6{
+		line-height: 1.5;
+		font-family: 'Montserrat', sans-serif;
+	}
+	.invoice-top-left h4{
+		margin-top: 30px;
+		font-family: 'Montserrat', sans-serif;
+	}
+	.invoice-top-left h5{
+		line-height: 1.4;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+	}
+	.client-company-name{
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	.client-address{
+		font-size: 14px;
+		margin-top: 5px;
+		color: rgba(0,0,0,0.75);
+	}
+	.invoice-top-right h2 , .invoice-top-right h6{
+		text-align: right;
+		line-height: 1.5;
+		font-family: 'Montserrat', sans-serif;
+	}
+	.invoice-top-right h5{
+		line-height: 1.4;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		text-align: right;
+		margin-top: 0;
+	}
+	.our-company-name{
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	.our-address{
+		font-size: 13px;
+		margin-top: 0;
+		color: rgba(0,0,0,0.75);
+	}
+	.logo-wrapper{ overflow: auto; }
+	.invoice-bottom{
+		background-color: #ffffff;
+		padding: 40px 60px;
+		position: relative;
+	}
+	.title{
+		font-size: 30px;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 600;
+		margin-bottom: 30px;
+	}
+	.invoice-bottom-left h5, .invoice-bottom-left h4{
+		font-family: 'Montserrat', sans-serif;
+	}
+	.invoice-bottom-left h4{ font-weight: 400; }
+	.terms{
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14px;
+		margin-top: 40px;
+	}
+	.divider{
+		margin-top: 50px;
+		margin-bottom: 5px;
+	}
+	.bottom-bar{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 26px;
+		background-color: #323149;
+	}
+
+	/* ===================================================================
+	   DYNAMIC ADD-ONS — screen-only chrome, stripped on print.
+	   Nothing here touches the invoice's own colors / layout / fonts.
+	   =================================================================== */
+	body.dyn{ background:#ececed; }
+
+	/* make sure the gray top + dark bottom bar actually render in the PDF */
+	.invoice-top, .bottom-bar{
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	/* --- toolbar --- */
+	.toolbar{
+		max-width: 700px;
+		margin: 20px auto 0;
+		background:#ffffff;
+		border:1px solid #e4e4e8;
+		border-radius:6px;
+		box-shadow:0 1px 3px rgba(0,0,0,.08);
+		padding:10px 14px;
+		display:flex;
+		flex-wrap:wrap;
+		align-items:center;
+		gap:10px;
+		font-family:'Montserrat', sans-serif;
+		font-size:13px;
+	}
+	.toolbar .tb-group{ display:flex; align-items:center; gap:6px; }
+	.toolbar label{ margin:0; font-weight:600; font-size:12px; color:#323149; }
+	.toolbar select,
+	.toolbar input[type=number]{
+		font-family:inherit; font-size:13px;
+		padding:4px 6px; border:1px solid #ccc; border-radius:4px; background:#fff;
+	}
+	.toolbar input[type=number]{ width:64px; }
+	.toolbar .spacer{ flex:1 1 auto; }
+	.tb-btn{
+		font-family:inherit; font-size:13px; font-weight:600; cursor:pointer;
+		border:1px solid #323149; background:#323149; color:#fff;
+		padding:6px 12px; border-radius:4px; line-height:1.2;
+	}
+	.tb-btn.secondary{ background:#fff; color:#323149; }
+	.tb-btn:active{ transform:translateY(1px); }
+	.tb-hint{
+		max-width:700px; margin:6px auto 0; padding:0 4px;
+		font-family:'Montserrat', sans-serif; font-size:11px; color:#8a8a93; text-align:center;
+	}
+
+	/* --- inline-edit affordances --- */
+	[contenteditable="true"]{
+		outline:none; cursor:text; border-radius:3px;
+		transition:background .15s, box-shadow .15s;
+	}
+	[contenteditable="true"]:hover{ box-shadow:0 0 0 1px #cfcfd8 inset; }
+	[contenteditable="true"]:focus{ background:#fffbe6; box-shadow:0 0 0 1px #e0c200 inset; }
+
+	/* --- per-row delete control (no extra column — sits in the gutter) --- */
+	.line-row td:first-child{ position:relative; }
+	.row-delete{
+		position:absolute; left:-26px; top:50%; transform:translateY(-50%);
+		width:18px; height:18px; padding:0; line-height:16px; text-align:center;
+		border:none; border-radius:50%; background:#e74c3c; color:#fff;
+		font-size:13px; cursor:pointer; opacity:0; transition:opacity .15s;
+	}
+	.line-row:hover .row-delete{ opacity:1; }
+
+	/* --- print: deliver a clean invoice, identical to invoice1 --- */
+	@page{ margin: 12mm; }
+	@media print{
+		body.dyn{ background:#fff; }
+		.toolbar, .tb-hint{ display:none !important; }
+		.row-delete{ display:none !important; }
+		[contenteditable="true"]:hover,
+		[contenteditable="true"]:focus{ background:none !important; box-shadow:none !important; }
+		.invoice-wrapper{ box-shadow:none !important; margin:0 auto; }
+	}
+	</style>
+</head>
+<body class="dyn">
+
+	<!-- ============ TOOLBAR (screen only) ============ -->
+	<div class="toolbar no-print">
+		<div class="tb-group">
+			<label for="curSel">Currency</label>
+			<select id="curSel">
+				<option value="INR">₹ INR</option>
+				<option value="USD">$ USD</option>
+				<option value="EUR">€ EUR</option>
+				<option value="GBP">£ GBP</option>
+				<option value="AED">AED</option>
+			</select>
+		</div>
+		<div class="tb-group">
+			<label for="taxPct">Tax %</label>
+			<input type="number" id="taxPct" value="0" min="0" step="0.5">
+		</div>
+		<button type="button" class="tb-btn secondary" id="addRow">+ Line item</button>
+		<button type="button" class="tb-btn secondary" id="logoBtn">Upload logo</button>
+		<input type="file" id="logoFile" accept="image/*" style="display:none">
+		<span class="spacer"></span>
+		<button type="button" class="tb-btn" id="savePdf">💾 Save as PDF</button>
+	</div>
+	<div class="tb-hint no-print">Click any text to edit it · hover a row to remove it · totals update live</div>
+
+	<!-- ============ INVOICE (identical design to invoice1) ============ -->
+	<section class="back">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="invoice-wrapper">
+						<div class="invoice-top">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="invoice-top-left">
+										<h2 class="client-company-name" contenteditable="true">Google Inc.</h2>
+										<h6 class="client-address" contenteditable="true">31 Lake Floyd Circle, <br>Delaware, AC 987869 <br>India</h6>
+										<h4>Reference</h4>
+										<h5 contenteditable="true">UX Design &amp; Development for <br> Android App.</h5>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="invoice-top-right">
+										<h2 class="our-company-name" contenteditable="true">Acme LLP</h2>
+										<h6 class="our-address" contenteditable="true">477 Blackwell Street, <br>Dry Creek, Alaska <br>India</h6>
+										<div class="logo-wrapper">
+											<img src="../invoice1/Acme.png" id="logoImg" class="img-responsive pull-right logo" />
+										</div>
+										<h5 contenteditable="true">06 September 2017</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="invoice-bottom">
+							<div class="row">
+								<div class="col-xs-12">
+									<h2 class="title">Invoice</h2>
+								</div>
+								<div class="clearfix"></div>
+
+								<div class="col-sm-3 col-md-3">
+									<div class="invoice-bottom-left">
+										<h5>Invoice No.</h5>
+										<h4 contenteditable="true">BJI 009872</h4>
+									</div>
+								</div>
+								<div class="col-md-offset-1 col-md-8 col-sm-9">
+									<div class="invoice-bottom-right">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Qty</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody id="lineBody">
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">Initial research</span></td>
+													<td><span class="price" contenteditable="true">10000</span></td>
+												</tr>
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">UX design</span></td>
+													<td><span class="price" contenteditable="true">35000</span></td>
+												</tr>
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">Web app development</span></td>
+													<td><span class="price" contenteditable="true">50000</span></td>
+												</tr>
+												<tr class="spacer" style="height: 40px;"></tr>
+											</tbody>
+											<thead class="totals">
+												<tr id="subtotalRow">
+													<th>Subtotal</th>
+													<th></th>
+													<th id="subtotalVal"></th>
+												</tr>
+												<tr id="taxRow">
+													<th>Tax (<span id="taxLabel">0</span>%)</th>
+													<th></th>
+													<th id="taxVal"></th>
+												</tr>
+												<tr>
+													<th>Total</th>
+													<th></th>
+													<th id="totalVal"></th>
+												</tr>
+											</thead>
+										</table>
+										<h4 class="terms">Terms</h4>
+										<ul>
+											<li contenteditable="true">Invoice to be paid in advance.</li>
+											<li contenteditable="true">Make payment in 2,3 business days.</li>
+										</ul>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="col-xs-12">
+									<hr class="divider">
+								</div>
+								<div class="col-sm-4">
+									<h6 class="text-left" contenteditable="true">acme.com</h6>
+								</div>
+								<div class="col-sm-4">
+									<h6 class="text-center" contenteditable="true">contact@acme.com</h6>
+								</div>
+								<div class="col-sm-4">
+									<h6 class="text-right" contenteditable="true">+91 8097678988</h6>
+								</div>
+							</div>
+							<div class="bottom-bar"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+	(function(){
+		"use strict";
+
+		var CURRENCIES = {
+			INR: { locale:'en-IN', code:'INR' },
+			USD: { locale:'en-US', code:'USD' },
+			EUR: { locale:'en-IE', code:'EUR' },
+			GBP: { locale:'en-GB', code:'GBP' },
+			AED: { locale:'en-AE', code:'AED' }
+		};
+		var cur = CURRENCIES.INR;
+
+		var tbody     = document.getElementById('lineBody');
+		var taxInput  = document.getElementById('taxPct');
+		var curSel    = document.getElementById('curSel');
+
+		function fmt(n){
+			n = n || 0;
+			try{
+				return new Intl.NumberFormat(cur.locale, {
+					style:'currency', currency:cur.code, maximumFractionDigits:2
+				}).format(n);
+			}catch(e){
+				return n.toFixed(2);
+			}
+		}
+		function parseNum(t){
+			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
+			return isNaN(v) ? 0 : v;
+		}
+		function selectAll(el){
+			setTimeout(function(){
+				var r = document.createRange();
+				r.selectNodeContents(el);
+				var s = window.getSelection();
+				s.removeAllRanges();
+				s.addRange(r);
+			}, 0);
+		}
+
+		function recalc(){
+			var subtotal = 0;
+			var rows = tbody.querySelectorAll('.line-row');
+			Array.prototype.forEach.call(rows, function(r){
+				var qty   = parseNum(r.querySelector('.qty').textContent);
+				var price = parseNum(r.querySelector('.price').textContent);
+				subtotal += qty * price;
+			});
+			var taxPct = parseNum(taxInput.value);
+			var taxAmt = subtotal * taxPct / 100;
+			var total  = subtotal + taxAmt;
+
+			document.getElementById('subtotalVal').textContent = fmt(subtotal);
+			document.getElementById('taxVal').textContent      = fmt(taxAmt);
+			document.getElementById('taxLabel').textContent    = (Math.round(taxPct * 100) / 100);
+			document.getElementById('totalVal').textContent    = fmt(total);
+
+			// Keep the original "just a Total row" look until tax is actually applied.
+			var show = taxPct > 0 ? '' : 'none';
+			document.getElementById('subtotalRow').style.display = show;
+			document.getElementById('taxRow').style.display      = show;
+		}
+
+		function reformatPrices(){
+			Array.prototype.forEach.call(tbody.querySelectorAll('.price'), function(c){
+				if(document.activeElement !== c){
+					c.textContent = fmt(parseNum(c.textContent));
+				}
+			});
+		}
+
+		// --- line item editing (event delegation) ---
+		tbody.addEventListener('input', function(e){
+			if(e.target.classList.contains('qty') || e.target.classList.contains('price')){
+				recalc();
+			}
+		});
+		tbody.addEventListener('focusin', function(e){
+			if(e.target.classList.contains('price')){
+				var v = parseNum(e.target.textContent);
+				e.target.textContent = v ? String(v) : '';
+				selectAll(e.target);
+			}
+		});
+		tbody.addEventListener('focusout', function(e){
+			if(e.target.classList.contains('price')){
+				e.target.textContent = fmt(parseNum(e.target.textContent));
+				recalc();
+			}
+		});
+		tbody.addEventListener('click', function(e){
+			if(!e.target.classList.contains('row-delete')) return;
+			var row = e.target.closest('.line-row');
+			if(tbody.querySelectorAll('.line-row').length > 1){
+				row.parentNode.removeChild(row);
+			}else{
+				// never leave the table empty — just clear the last row
+				row.querySelector('.qty').textContent  = '1';
+				row.querySelector('.desc').textContent = '';
+				row.querySelector('.price').textContent = fmt(0);
+			}
+			recalc();
+		});
+
+		// --- toolbar ---
+		document.getElementById('addRow').addEventListener('click', function(){
+			var spacer = tbody.querySelector('.spacer');
+			var tr = document.createElement('tr');
+			tr.className = 'line-row';
+			tr.innerHTML =
+				'<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>' +
+				'<td><span class="desc" contenteditable="true">New item</span></td>' +
+				'<td><span class="price" contenteditable="true">' + fmt(0) + '</span></td>';
+			tbody.insertBefore(tr, spacer);
+			var desc = tr.querySelector('.desc');
+			desc.focus();
+			selectAll(desc);
+			recalc();
+		});
+
+		taxInput.addEventListener('input', recalc);
+
+		curSel.addEventListener('change', function(){
+			cur = CURRENCIES[curSel.value] || CURRENCIES.INR;
+			reformatPrices();
+			recalc();
+		});
+
+		document.getElementById('logoBtn').addEventListener('click', function(){
+			document.getElementById('logoFile').click();
+		});
+		document.getElementById('logoFile').addEventListener('change', function(e){
+			var f = e.target.files && e.target.files[0];
+			if(!f) return;
+			var rd = new FileReader();
+			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
+			rd.readAsDataURL(f);
+		});
+
+		document.getElementById('savePdf').addEventListener('click', function(){
+			window.print();
+		});
+
+		// --- init ---
+		reformatPrices();
+		recalc();
+	})();
+	</script>
+
+</body>
+</html>
