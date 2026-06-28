@@ -1,5 +1,5 @@
 # html-invoice-templates
-The clean, modern, responsive html invoice templates based on bootstrap 3. The downloadable zip file content sample logo used, html file and css file.
+The clean, modern, responsive html invoice templates based on bootstrap 3. Now editable in the browser — open a template, click any field to fill it in, watch line items and totals calculate live, switch currency, upload a logo, and save to PDF. The source (HTML/CSS) for each template lives right here in the repo.
 [View Demo](https://nirajrajgor.github.io/html-invoice-templates/)
 
 ## Disclaimer
