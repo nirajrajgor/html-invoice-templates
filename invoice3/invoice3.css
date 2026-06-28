@@ -171,3 +171,112 @@ hr{
     letter-spacing: 1.5px;
 }
 .payment h3 a{ color: #fff; }
+
+/* ===================================================================
+   EDIT MODE — screen-only tooling. Stripped entirely on print so the
+   exported PDF is the clean invoice, identical to the original design.
+   =================================================================== */
+
+/* make sure the colored areas render in the printed PDF */
+.bg-color, .footer, .payment{
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+/* --- sticky top bar: back-nav (left) + edit controls (right) --- */
+.edit-bar{
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 10px 18px;
+	background-color: #323149;
+	color: #fff;
+	font-family: 'Montserrat', sans-serif;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.eb-back{
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.eb-back:hover, .eb-back:focus{ color: #fff; text-decoration: underline; }
+.eb-spacer{ flex: 1 1 auto; }
+.eb-controls{ display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.eb-controls label{
+	display: inline-flex; align-items: center; gap: 6px;
+	margin: 0; font-size: 12px; font-weight: 600; color: #d7d7e0;
+}
+.eb-controls select{
+	font-family: inherit; font-size: 13px; color: #323149;
+	height: 32px; box-sizing: border-box;
+	padding: 4px 6px; border: 1px solid #fff; border-radius: 4px; background: #fff;
+}
+/* keep the native file input fully hidden — only the styled "Upload logo" button shows */
+#logoFile{ display: none !important; }
+.eb-btn{
+	display: inline-flex; align-items: center; justify-content: center;
+	height: 32px; box-sizing: border-box;
+	font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+	padding: 0 14px; border-radius: 4px;
+	border: 1px solid rgba(255,255,255,0.6); background: transparent; color: #fff;
+}
+.eb-btn:hover{ background: rgba(255,255,255,0.12); }
+.eb-btn.primary{ background: #fff; color: #323149; border-color: #fff; }
+.eb-btn.primary:hover{ background: #f0f0f5; }
+.eb-btn:active{ transform: translateY(1px); }
+
+/* --- "this is editable" hint strip --- */
+.edit-hint{
+	margin: 0;
+	padding: 7px 18px;
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	color: #8a7600;
+	background: #fffbe6;
+	border-bottom: 1px solid #f3ead0;
+}
+
+/* --- inline-edit affordances --- */
+[contenteditable="true"]{
+	outline: none; cursor: text; border-radius: 3px;
+	transition: background .15s, box-shadow .15s;
+}
+[contenteditable="true"]:hover{ box-shadow: 0 0 0 1px #cfcfd8 inset; }
+[contenteditable="true"]:focus{ background: #fffbe6; box-shadow: 0 0 0 1px #e0c200 inset; }
+
+/* --- per-service delete control (right gutter) --- */
+.service-row{ position: relative; }
+.service-row .row-delete{
+	position: absolute; right: -28px; top: 16px;
+	width: 18px; height: 18px; padding: 0; line-height: 16px; text-align: center;
+	border: none; border-radius: 50%; background: #e74c3c; color: #fff;
+	font-size: 13px; cursor: pointer; opacity: 0; transition: opacity .15s;
+}
+.service-row:hover .row-delete{ opacity: 1; }
+
+/* --- "add service" control (screen only) --- */
+.add-service-wrap{ margin: 4px 0 0; }
+.add-service{
+	display: inline-block;
+	padding: 5px 12px;
+	font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+	color: #323149; background: transparent;
+	border: 1px dashed #b9b9c4; border-radius: 4px; cursor: pointer;
+}
+.add-service:hover{ background: #f3f3f6; border-color: #323149; }
+
+/* --- print: drop all tooling, deliver the clean invoice --- */
+@page{ margin: 12mm; }
+@media print{
+	.edit-bar, .edit-hint{ display: none !important; }
+	.row-delete, .add-service-wrap{ display: none !important; }
+	[contenteditable="true"]:hover,
+	[contenteditable="true"]:focus{ background: none !important; box-shadow: none !important; }
+}
