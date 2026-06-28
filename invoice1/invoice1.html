@@ -26,6 +26,31 @@
 </head>
 <body>
 
+	<!-- ============ EDIT BAR — back-nav + controls (screen only) ============ -->
+	<div class="edit-bar">
+		<a class="eb-back" href="../index.html">&larr; Invoice Templates</a>
+		<span class="eb-spacer"></span>
+		<div class="eb-controls">
+			<label>Currency
+				<select id="curSel">
+					<option value="INR">₹ INR</option>
+					<option value="USD">$ USD</option>
+					<option value="EUR">€ EUR</option>
+					<option value="GBP">£ GBP</option>
+					<option value="AED">AED</option>
+				</select>
+			</label>
+			<label>Tax %
+				<input type="number" id="taxPct" value="0" min="0" step="0.5">
+			</label>
+			<button type="button" class="eb-btn" id="addRow">+ Line</button>
+			<button type="button" class="eb-btn" id="logoBtn">Upload logo</button>
+			<input type="file" id="logoFile" accept="image/*" hidden>
+			<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
+		</div>
+	</div>
+	<p class="edit-hint">✏️ Click any text to edit it — totals update as you type. Hover a row to remove it.</p>
+
 	<section class="back">
 		<div class="container">
 			<div class="row">
@@ -35,20 +60,20 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="invoice-top-left">
-										<h2 class="client-company-name">Google Inc.</h2>
-										<h6 class="client-address">31 Lake Floyd Circle, <br>Delaware, AC 987869 <br>India</h6>
+										<h2 class="client-company-name" contenteditable="true">Google Inc.</h2>
+										<h6 class="client-address" contenteditable="true">31 Lake Floyd Circle, <br>Delaware, AC 987869 <br>India</h6>
 										<h4>Reference</h4>
-										<h5>UX Design &amp; Development for <br> Android App.</h5>
+										<h5 contenteditable="true">UX Design &amp; Development for <br> Android App.</h5>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="invoice-top-right">
-										<h2 class="our-company-name">Acme LLP</h2>
-										<h6 class="our-address">477 Blackwell Street, <br>Dry Creek, Alaska <br>India</h6>
+										<h2 class="our-company-name" contenteditable="true">Acme LLP</h2>
+										<h6 class="our-address" contenteditable="true">477 Blackwell Street, <br>Dry Creek, Alaska <br>India</h6>
 										<div class="logo-wrapper">
-											<img src="./Acme.png" class="img-responsive pull-right logo" />
+											<img src="./Acme.png" id="logoImg" class="img-responsive pull-right logo" />
 										</div>
-										<h5>06 September 2017</h5>
+										<h5 contenteditable="true">06 September 2017</h5>
 									</div>
 								</div>
 							</div>
@@ -63,7 +88,7 @@
 								<div class="col-sm-3 col-md-3">
 									<div class="invoice-bottom-left">
 										<h5>Invoice No.</h5>
-										<h4>BJI 009872</h4>
+										<h4 contenteditable="true">BJI 009872</h4>
 									</div>
 								</div>
 								<div class="col-md-offset-1 col-md-8 col-sm-9">
@@ -76,36 +101,46 @@
 													<th>Price</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Initial research</td>
-													<td>₹10,000</td>
+											<tbody id="lineBody">
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">Initial research</span></td>
+													<td><span class="price" contenteditable="true">10000</span></td>
 												</tr>
-												<tr>
-													<td>1</td>
-													<td>UX design</td>
-													<td>₹35,000</td>
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">UX design</span></td>
+													<td><span class="price" contenteditable="true">35000</span></td>
 												</tr>
-												<tr>
-													<td>1</td>
-													<td>Web app development</td>
-													<td>₹50,000</td>
+												<tr class="line-row">
+													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="desc" contenteditable="true">Web app development</span></td>
+													<td><span class="price" contenteditable="true">50000</span></td>
 												</tr>
-												<tr style="height: 40px;"></tr>
+												<tr class="spacer" style="height: 40px;"></tr>
 											</tbody>
-											<thead>
+											<thead class="totals">
+												<tr id="subtotalRow">
+													<th>Subtotal</th>
+													<th></th>
+													<th id="subtotalVal"></th>
+												</tr>
+												<tr id="taxRow">
+													<th>Tax (<span id="taxLabel">0</span>%)</th>
+													<th></th>
+													<th id="taxVal"></th>
+												</tr>
 												<tr>
 													<th>Total</th>
 													<th></th>
-													<th>₹95,000</th>
+													<th id="totalVal"></th>
 												</tr>
 											</thead>
 										</table>
 										<h4 class="terms">Terms</h4>
 										<ul>
-											<li>Invoice to be paid in advance.</li>
-											<li>Make payment in 2,3 business days.</li>
+											<li contenteditable="true">Invoice to be paid in advance.</li>
+											<li contenteditable="true">Make payment in 2,3 business days.</li>
 										</ul>
 									</div>
 								</div>
@@ -114,13 +149,13 @@
 									<hr class="divider">
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-left">acme.com</h6>
+									<h6 class="text-left" contenteditable="true">acme.com</h6>
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-center">contact@acme.com</h6>
+									<h6 class="text-center" contenteditable="true">contact@acme.com</h6>
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-right">+91 8097678988</h6>
+									<h6 class="text-right" contenteditable="true">+91 8097678988</h6>
 								</div>
 							</div>
 							<div class="bottom-bar"></div>
@@ -130,13 +165,164 @@
 			</div>
 		</div>
 	</section>
-	
+
 
 	<!-- jquery slim version 3.2.1 minified -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- ============ Live-editing engine (vanilla JS, no dependencies) ============ -->
+	<script>
+	(function(){
+		"use strict";
+
+		var CURRENCIES = {
+			INR: { locale:'en-IN', code:'INR' },
+			USD: { locale:'en-US', code:'USD' },
+			EUR: { locale:'en-IE', code:'EUR' },
+			GBP: { locale:'en-GB', code:'GBP' },
+			AED: { locale:'en-AE', code:'AED' }
+		};
+		var cur = CURRENCIES.INR;
+
+		var tbody    = document.getElementById('lineBody');
+		var taxInput = document.getElementById('taxPct');
+		var curSel   = document.getElementById('curSel');
+
+		function fmt(n){
+			n = n || 0;
+			try{
+				return new Intl.NumberFormat(cur.locale, {
+					style:'currency', currency:cur.code, maximumFractionDigits:2
+				}).format(n);
+			}catch(e){
+				return n.toFixed(2);
+			}
+		}
+		function parseNum(t){
+			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
+			return isNaN(v) ? 0 : v;
+		}
+		function selectAll(el){
+			setTimeout(function(){
+				var r = document.createRange();
+				r.selectNodeContents(el);
+				var s = window.getSelection();
+				s.removeAllRanges();
+				s.addRange(r);
+			}, 0);
+		}
+
+		function recalc(){
+			var subtotal = 0;
+			var rows = tbody.querySelectorAll('.line-row');
+			Array.prototype.forEach.call(rows, function(r){
+				var qty   = parseNum(r.querySelector('.qty').textContent);
+				var price = parseNum(r.querySelector('.price').textContent);
+				subtotal += qty * price;
+			});
+			var taxPct = parseNum(taxInput.value);
+			var taxAmt = subtotal * taxPct / 100;
+			var total  = subtotal + taxAmt;
+
+			document.getElementById('subtotalVal').textContent = fmt(subtotal);
+			document.getElementById('taxVal').textContent      = fmt(taxAmt);
+			document.getElementById('taxLabel').textContent    = (Math.round(taxPct * 100) / 100);
+			document.getElementById('totalVal').textContent    = fmt(total);
+
+			// Keep the original "just a Total row" look until tax is actually applied.
+			var show = taxPct > 0 ? '' : 'none';
+			document.getElementById('subtotalRow').style.display = show;
+			document.getElementById('taxRow').style.display      = show;
+		}
+
+		function reformatPrices(){
+			Array.prototype.forEach.call(tbody.querySelectorAll('.price'), function(c){
+				if(document.activeElement !== c){
+					c.textContent = fmt(parseNum(c.textContent));
+				}
+			});
+		}
+
+		// --- line item editing (event delegation) ---
+		tbody.addEventListener('input', function(e){
+			if(e.target.classList.contains('qty') || e.target.classList.contains('price')){
+				recalc();
+			}
+		});
+		tbody.addEventListener('focusin', function(e){
+			if(e.target.classList.contains('price')){
+				var v = parseNum(e.target.textContent);
+				e.target.textContent = v ? String(v) : '';
+				selectAll(e.target);
+			}
+		});
+		tbody.addEventListener('focusout', function(e){
+			if(e.target.classList.contains('price')){
+				e.target.textContent = fmt(parseNum(e.target.textContent));
+				recalc();
+			}
+		});
+		tbody.addEventListener('click', function(e){
+			if(!e.target.classList.contains('row-delete')) return;
+			var row = e.target.closest('.line-row');
+			if(tbody.querySelectorAll('.line-row').length > 1){
+				row.parentNode.removeChild(row);
+			}else{
+				// never leave the table empty — just clear the last row
+				row.querySelector('.qty').textContent   = '1';
+				row.querySelector('.desc').textContent  = '';
+				row.querySelector('.price').textContent = fmt(0);
+			}
+			recalc();
+		});
+
+		// --- toolbar ---
+		document.getElementById('addRow').addEventListener('click', function(){
+			var spacer = tbody.querySelector('.spacer');
+			var tr = document.createElement('tr');
+			tr.className = 'line-row';
+			tr.innerHTML =
+				'<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>' +
+				'<td><span class="desc" contenteditable="true">New item</span></td>' +
+				'<td><span class="price" contenteditable="true">' + fmt(0) + '</span></td>';
+			tbody.insertBefore(tr, spacer);
+			var desc = tr.querySelector('.desc');
+			desc.focus();
+			selectAll(desc);
+			recalc();
+		});
+
+		taxInput.addEventListener('input', recalc);
+
+		curSel.addEventListener('change', function(){
+			cur = CURRENCIES[curSel.value] || CURRENCIES.INR;
+			reformatPrices();
+			recalc();
+		});
+
+		document.getElementById('logoBtn').addEventListener('click', function(){
+			document.getElementById('logoFile').click();
+		});
+		document.getElementById('logoFile').addEventListener('change', function(e){
+			var f = e.target.files && e.target.files[0];
+			if(!f) return;
+			var rd = new FileReader();
+			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
+			rd.readAsDataURL(f);
+		});
+
+		document.getElementById('savePdf').addEventListener('click', function(){
+			window.print();
+		});
+
+		// --- init ---
+		reformatPrices();
+		recalc();
+	})();
+	</script>
 
 </body>
 </html>
