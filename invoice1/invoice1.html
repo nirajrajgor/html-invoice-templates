@@ -43,7 +43,6 @@
 			<label>Tax %
 				<input type="number" id="taxPct" value="0" min="0" step="0.5">
 			</label>
-			<button type="button" class="eb-btn" id="addRow">+ Line</button>
 			<button type="button" class="eb-btn" id="logoBtn">Upload logo</button>
 			<input type="file" id="logoFile" accept="image/*" hidden>
 			<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
@@ -103,20 +102,21 @@
 											</thead>
 											<tbody id="lineBody">
 												<tr class="line-row">
-													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="qty" contenteditable="true">1</span></td>
 													<td><span class="desc" contenteditable="true">Initial research</span></td>
-													<td><span class="price" contenteditable="true">10000</span></td>
+													<td><span class="price" contenteditable="true">10000</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
 												<tr class="line-row">
-													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="qty" contenteditable="true">1</span></td>
 													<td><span class="desc" contenteditable="true">UX design</span></td>
-													<td><span class="price" contenteditable="true">35000</span></td>
+													<td><span class="price" contenteditable="true">35000</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
 												<tr class="line-row">
-													<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>
+													<td><span class="qty" contenteditable="true">1</span></td>
 													<td><span class="desc" contenteditable="true">Web app development</span></td>
-													<td><span class="price" contenteditable="true">50000</span></td>
+													<td><span class="price" contenteditable="true">50000</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
+												<tr class="add-row"><td colspan="3"><button type="button" class="add-line" id="addLine">+ Add line item</button></td></tr>
 												<tr class="spacer" style="height: 40px;"></tr>
 											</tbody>
 											<thead class="totals">
@@ -266,6 +266,7 @@
 			}
 		});
 		tbody.addEventListener('click', function(e){
+			if(e.target.classList.contains('add-line')){ addLineItem(); return; }
 			if(!e.target.classList.contains('row-delete')) return;
 			var row = e.target.closest('.line-row');
 			if(tbody.querySelectorAll('.line-row').length > 1){
@@ -279,22 +280,23 @@
 			recalc();
 		});
 
-		// --- toolbar ---
-		document.getElementById('addRow').addEventListener('click', function(){
-			var spacer = tbody.querySelector('.spacer');
+		// --- add a line item (button lives inside the table) ---
+		function addLineItem(){
+			var anchor = tbody.querySelector('.add-row');
 			var tr = document.createElement('tr');
 			tr.className = 'line-row';
 			tr.innerHTML =
-				'<td><button type="button" class="row-delete" title="Remove row">&times;</button><span class="qty" contenteditable="true">1</span></td>' +
+				'<td><span class="qty" contenteditable="true">1</span></td>' +
 				'<td><span class="desc" contenteditable="true">New item</span></td>' +
-				'<td><span class="price" contenteditable="true">' + fmt(0) + '</span></td>';
-			tbody.insertBefore(tr, spacer);
+				'<td><span class="price" contenteditable="true">' + fmt(0) + '</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>';
+			tbody.insertBefore(tr, anchor);
 			var desc = tr.querySelector('.desc');
 			desc.focus();
 			selectAll(desc);
 			recalc();
-		});
+		}
 
+		// --- toolbar ---
 		taxInput.addEventListener('input', recalc);
 
 		curSel.addEventListener('change', function(){
