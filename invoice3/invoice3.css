@@ -161,24 +161,13 @@ hr{
 	color: rgba(0,0,0,0.4);
 	margin-top: 20px;
 }
-.payment{
-	background-color: #2196F3;
-	padding: 20px;
-}
-.payment h3{
-    margin: 0;
-    font-size: 20px;
-    letter-spacing: 1.5px;
-}
-.payment h3 a{ color: #fff; }
-
 /* ===================================================================
    EDIT MODE — screen-only tooling. Stripped entirely on print so the
    exported PDF is the clean invoice, identical to the original design.
    =================================================================== */
 
 /* make sure the colored areas render in the printed PDF */
-.bg-color, .footer, .payment{
+.bg-color, .footer{
 	-webkit-print-color-adjust: exact;
 	print-color-adjust: exact;
 }
