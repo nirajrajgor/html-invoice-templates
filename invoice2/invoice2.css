@@ -298,9 +298,8 @@ body{
 	[contenteditable="true"]:hover,
 	[contenteditable="true"]:focus{ background: none !important; box-shadow: none !important; }
 
-	/* this template bundles two documents (proposal + invoice) — export the
-	   one you want, or both as a clean 2-page PDF */
+	/* this template bundles two documents (proposal + invoice) — export one
+	   at a time so each is a single clean page */
 	body.print-invoice .front{ display: none !important; }
 	body.print-proposal .back{ display: none !important; }
-	body.print-both .back{ page-break-before: always; }
 }
