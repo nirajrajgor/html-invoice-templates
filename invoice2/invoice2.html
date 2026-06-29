@@ -181,7 +181,7 @@
 													<td><h4 class="hours" contenteditable="true">50</h4></td>
 													<td><h4 class="amount">₹2500</h4><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
-												<tr class="add-row"><td colspan="4"><button type="button" class="add-line" id="addLine">+ Add line item</button></td></tr>
+												<tr class="add-row"><td colspan="4"><button type="button" class="add-line">+ Add line item</button></td></tr>
 											</tbody>
 										</table>
 									</div>
@@ -257,15 +257,23 @@
 		var taxInput = document.getElementById('taxPct');
 		var curSel   = document.getElementById('curSel');
 
+		var subtotalVal = document.getElementById('subtotalVal');
+		var taxVal      = document.getElementById('taxVal');
+		var totalVal    = document.getElementById('totalVal');
+
 		function fmt(n){
 			n = n || 0;
-			try{
-				return new Intl.NumberFormat(cur.locale, {
-					style:'currency', currency:cur.code, maximumFractionDigits:2
-				}).format(n);
-			}catch(e){
-				return n.toFixed(2);
+			var nf = cur.nf;
+			if(!nf){
+				try{
+					nf = cur.nf = new Intl.NumberFormat(cur.locale, {
+						style:'currency', currency:cur.code, maximumFractionDigits:2
+					});
+				}catch(e){
+					return n.toFixed(2);
+				}
 			}
+			return nf.format(n);
 		}
 		function parseNum(t){
 			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
@@ -294,9 +302,9 @@
 			var taxAmt = subtotal * taxPct / 100;
 			var total  = subtotal + taxAmt;
 
-			document.getElementById('subtotalVal').textContent = fmt(subtotal);
-			document.getElementById('taxVal').textContent      = fmt(taxAmt);
-			document.getElementById('totalVal').textContent    = fmt(total);
+			subtotalVal.textContent = fmt(subtotal);
+			taxVal.textContent      = fmt(taxAmt);
+			totalVal.textContent    = fmt(total);
 		}
 
 		// keep the editable RATE cells showing a formatted figure when not focused
@@ -370,7 +378,7 @@
 		// choose what gets exported: the proposal page, the invoice page, or both
 		var printScope = document.getElementById('printScope');
 		function applyScope(){
-			document.body.classList.remove('print-both', 'print-invoice', 'print-proposal');
+			document.body.classList.remove('print-invoice', 'print-proposal');
 			document.body.classList.add('print-' + printScope.value);
 		}
 		printScope.addEventListener('change', applyScope);

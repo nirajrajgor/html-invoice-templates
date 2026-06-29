@@ -102,7 +102,7 @@
 								<hr>
 							</div>
 
-							<div class="add-service-wrap"><button type="button" class="add-service" id="addService">+ Add service</button></div>
+							<div class="add-service-wrap"><button type="button" class="add-service">+ Add service</button></div>
 
 							<div class="row">
 								<div class="col-sm-10 col-xs-8">
@@ -196,13 +196,17 @@
 
 		function fmt(n){
 			n = n || 0;
-			try{
-				return new Intl.NumberFormat(cur.locale, {
-					style:'currency', currency:cur.code, maximumFractionDigits:2
-				}).format(n);
-			}catch(e){
-				return n.toFixed(2);
+			var nf = cur.nf;
+			if(!nf){
+				try{
+					nf = cur.nf = new Intl.NumberFormat(cur.locale, {
+						style:'currency', currency:cur.code, maximumFractionDigits:2
+					});
+				}catch(e){
+					return n.toFixed(2);
+				}
 			}
+			return nf.format(n);
 		}
 		function parseNum(t){
 			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));

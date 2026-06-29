@@ -117,8 +117,8 @@
 													<td><span class="desc" contenteditable="true">Web app development</span></td>
 													<td><span class="price" contenteditable="true">50000</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
-												<tr class="add-row"><td colspan="3"><button type="button" class="add-line" id="addLine">+ Add line item</button></td></tr>
-												<tr class="spacer" style="height: 40px;"></tr>
+												<tr class="add-row"><td colspan="3"><button type="button" class="add-line">+ Add line item</button></td></tr>
+												<tr style="height: 40px;"></tr>
 											</tbody>
 											<thead class="totals">
 												<tr id="subtotalRow">
@@ -192,15 +192,26 @@
 		var taxInput = document.getElementById('taxPct');
 		var curSel   = document.getElementById('curSel');
 
+		var subtotalVal = document.getElementById('subtotalVal');
+		var taxVal      = document.getElementById('taxVal');
+		var taxLabel    = document.getElementById('taxLabel');
+		var totalVal    = document.getElementById('totalVal');
+		var subtotalRow = document.getElementById('subtotalRow');
+		var taxRow      = document.getElementById('taxRow');
+
 		function fmt(n){
 			n = n || 0;
-			try{
-				return new Intl.NumberFormat(cur.locale, {
-					style:'currency', currency:cur.code, maximumFractionDigits:2
-				}).format(n);
-			}catch(e){
-				return n.toFixed(2);
+			var nf = cur.nf;
+			if(!nf){
+				try{
+					nf = cur.nf = new Intl.NumberFormat(cur.locale, {
+						style:'currency', currency:cur.code, maximumFractionDigits:2
+					});
+				}catch(e){
+					return n.toFixed(2);
+				}
 			}
+			return nf.format(n);
 		}
 		function parseNum(t){
 			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
@@ -228,15 +239,15 @@
 			var taxAmt = subtotal * taxPct / 100;
 			var total  = subtotal + taxAmt;
 
-			document.getElementById('subtotalVal').textContent = fmt(subtotal);
-			document.getElementById('taxVal').textContent      = fmt(taxAmt);
-			document.getElementById('taxLabel').textContent    = (Math.round(taxPct * 100) / 100);
-			document.getElementById('totalVal').textContent    = fmt(total);
+			subtotalVal.textContent = fmt(subtotal);
+			taxVal.textContent      = fmt(taxAmt);
+			taxLabel.textContent    = (Math.round(taxPct * 100) / 100);
+			totalVal.textContent    = fmt(total);
 
 			// Keep the original "just a Total row" look until tax is actually applied.
 			var show = taxPct > 0 ? '' : 'none';
-			document.getElementById('subtotalRow').style.display = show;
-			document.getElementById('taxRow').style.display      = show;
+			subtotalRow.style.display = show;
+			taxRow.style.display      = show;
 		}
 
 		function reformatPrices(){
