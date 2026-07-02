@@ -64,6 +64,13 @@ Invoice-top-right refers to the our name & address, logo and date
 	color: rgba(0,0,0,0.75);
 }
 .logo-wrapper{ overflow: auto; }
+.invoice-top-right .logo{
+	width: auto;
+	height: auto;
+	max-width: 240px;
+	max-height: 100px;
+	object-fit: contain;
+}
 
 /*
 Invoice-bottom refers to the bottom part of invoice template
@@ -107,4 +114,131 @@ bottom-bar is colored bar located at bottom of invoice-card
 	right: 0;
 	height: 26px;
 	background-color: #323149;
+}
+
+/* ===================================================================
+   EDIT MODE — screen-only tooling. Stripped entirely on print so the
+   exported PDF is the clean invoice, identical to the original design.
+   =================================================================== */
+
+/* make sure the gray top + dark bottom bar render in the printed PDF */
+.invoice-top, .bottom-bar{
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+/* --- sticky top bar: back-nav (left) + edit controls (right) --- */
+.edit-bar{
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 10px 18px;
+	background-color: #323149;
+	color: #fff;
+	font-family: 'Montserrat', sans-serif;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.eb-back{
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.eb-back:hover, .eb-back:focus{ color: #fff; text-decoration: underline; }
+.eb-spacer{ flex: 1 1 auto; }
+.eb-controls{ display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.eb-controls label{
+	display: inline-flex; align-items: center; gap: 6px;
+	margin: 0; font-size: 12px; font-weight: 600; color: #d7d7e0;
+}
+.eb-controls select,
+.eb-controls input[type="number"]{
+	font-family: inherit; font-size: 13px; color: #323149;
+	height: 32px; box-sizing: border-box;
+	padding: 4px 6px; border: 1px solid #fff; border-radius: 4px; background: #fff;
+}
+.eb-controls input[type="number"]{ width: 60px; }
+/* keep the native file input fully hidden — only the styled "Upload logo" button shows */
+#logoFile{ display: none !important; }
+.eb-btn{
+	display: inline-flex; align-items: center; justify-content: center;
+	height: 32px; box-sizing: border-box;
+	font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+	padding: 0 14px; border-radius: 4px;
+	border: 1px solid rgba(255,255,255,0.6); background: transparent; color: #fff;
+}
+.eb-btn:hover{ background: rgba(255,255,255,0.12); }
+.eb-btn.primary{ background: #fff; color: #323149; border-color: #fff; }
+.eb-btn.primary:hover{ background: #f0f0f5; }
+.eb-btn:active{ transform: translateY(1px); }
+
+/* --- "this is editable" hint strip --- */
+.edit-hint{
+	margin: 0;
+	padding: 7px 18px;
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	color: #8a7600;
+	background: #fffbe6;
+	border-bottom: 1px solid #f3ead0;
+}
+
+/* --- inline-edit affordances --- */
+[contenteditable="true"]{
+	outline: none; cursor: text; border-radius: 3px;
+	transition: background .15s, box-shadow .15s;
+}
+[contenteditable="true"]:hover{ box-shadow: 0 0 0 1px #cfcfd8 inset; }
+[contenteditable="true"]:focus{ background: #fffbe6; box-shadow: 0 0 0 1px #e0c200 inset; }
+
+/* --- per-row delete control (right gutter, no extra column) --- */
+.line-row td:last-child{ position: relative; }
+.row-delete{
+	position: absolute; right: -26px; top: 50%; transform: translateY(-50%);
+	width: 18px; height: 18px; padding: 0; line-height: 16px; text-align: center;
+	border: none; border-radius: 50%; background: #e74c3c; color: #fff;
+	font-size: 13px; cursor: pointer; opacity: 0; transition: opacity .15s;
+}
+.line-row:hover .row-delete{ opacity: 1; }
+
+/* --- in-table "add line item" control (screen only) --- */
+.add-row td{ border-top: none !important; padding: 6px 8px 0 !important; }
+.add-line{
+	display: inline-block;
+	padding: 5px 12px;
+	font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+	color: #323149; background: transparent;
+	border: 1px dashed #b9b9c4; border-radius: 4px; cursor: pointer;
+}
+.add-line:hover{ background: #f3f3f6; border-color: #323149; }
+
+/* --- print: drop all tooling, deliver the clean invoice --- */
+@page{ margin: 12mm; }
+@media print{
+	.edit-bar, .edit-hint{ display: none !important; }
+	.row-delete, .add-row{ display: none !important; }
+	[contenteditable="true"]:hover,
+	[contenteditable="true"]:focus{ background: none !important; box-shadow: none !important; }
+
+	/* Bootstrap's sm/md grid needs a ≥768px viewport, but an A4 page prints
+	   narrower — the columns would stack and push the invoice onto a second
+	   page. Re-apply the desktop column widths for print. */
+	.col-sm-3, .col-sm-4, .col-sm-6, .col-sm-9,
+	.col-md-3, .col-md-8{ float: left; }
+	.col-sm-3{ width: 25%; }
+	.col-sm-4{ width: 33.33333333%; }
+	.col-sm-6{ width: 50%; }
+	.col-sm-9{ width: 75%; }
+	.col-md-3{ width: 25%; }
+	.col-md-8{ width: 66.66666667%; }
+	.col-md-offset-1{ margin-left: 8.33333333%; }
+
+	/* no drop shadow or screen margin on paper */
+	.invoice-wrapper{ margin: 0 auto; box-shadow: none; }
 }

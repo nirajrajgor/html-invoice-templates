@@ -14,7 +14,7 @@
 	<!-- Custom font montseraat -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
 
-	<!-- Custom style invoice1.css -->
+	<!-- Custom style invoice2.css -->
 	<link rel="stylesheet" type="text/css" href="./invoice2.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,6 +26,35 @@
 </head>
 <body>
 
+	<!-- ============ EDIT BAR — back-nav + controls (screen only) ============ -->
+	<div class="edit-bar">
+		<a class="eb-back" href="../index.html">&larr; Invoice Templates</a>
+		<span class="eb-spacer"></span>
+		<div class="eb-controls">
+			<label>Currency
+				<select id="curSel">
+					<option value="INR">₹ INR</option>
+					<option value="USD">$ USD</option>
+					<option value="EUR">€ EUR</option>
+					<option value="GBP">£ GBP</option>
+					<option value="AED">AED</option>
+				</select>
+			</label>
+			<label>Tax %
+				<input type="number" id="taxPct" value="0" min="0" step="0.5">
+			</label>
+			<label>Export
+				<select id="printScope">
+					<option value="invoice">Invoice</option>
+					<option value="proposal">Proposal</option>
+				</select>
+			</label>
+		</div>
+		<span class="eb-spacer"></span>
+		<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
+	</div>
+	<p class="edit-hint">✏️ Click any text to edit it — Rate × Hours and totals update as you type. Hover a row to remove it.</p>
+
 	<section class="front">
 		<div class="container">
 			<div class="row">
@@ -35,53 +64,53 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="front-invoice-top-left">
-										<h2>John Doe</h2>
-										<h3>UI / UX</h3>
-										<h5>Mumbai, India</h5>
+										<h2 contenteditable="true">John Doe</h2>
+										<h3 contenteditable="true">UI / UX</h3>
+										<h5 contenteditable="true">Mumbai, India</h5>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="front-invoice-top-right">
-										<h2>Martin Sen</h2>
-										<h3>Hp Solutions</h3>
-										<h5>Delhi, India</h5>
+										<h2 contenteditable="true">Martin Sen</h2>
+										<h3 contenteditable="true">Hp Solutions</h3>
+										<h5 contenteditable="true">Delhi, India</h5>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-xs-12">
-									<h1 class="service-name">Proposal for Web Design &amp; Development</h1>
-									<h6 class="date">September 06, 2017</h6>
+									<h1 class="service-name" contenteditable="true">Proposal for Web Design &amp; Development</h1>
+									<h6 class="date" contenteditable="true">September 06, 2017</h6>
 								</div>
 							</div>
 						</div>
 						<div class="front-invoice-bottom">
 							<div class="row">
 								<div class="col-xs-12">
-									<p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur illo, iure eveniet, iste quidem nihil nemo molestiae! Repellat quidem, saepe, dignissimos dolor soluta nobis similique nemo voluptatem sed omnis velit!</p>
-									<h6 class="specs">Specifications are as follows:</h6>
+									<p class="description" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur illo, iure eveniet, iste quidem nihil nemo molestiae! Repellat quidem, saepe, dignissimos dolor soluta nobis similique nemo voluptatem sed omnis velit!</p>
+									<h6 class="specs" contenteditable="true">Specifications are as follows:</h6>
 								</div>
 								<div class="col-xs-12 col-sm-10 col-md-9">
 									<table class="table borderless custom-table">
 										<tbody>
 											<tr>
 												<td>Rate:</td>
-												<td>₹50 / hour</td>
+												<td><span id="proposalCurrency">₹</span><span contenteditable="true">50 / hour</span></td>
 											</tr>
 											<tr>
 												<td>Estimated Time:</td>
-												<td>100 hours</td>
+												<td contenteditable="true">100 hours</td>
 											</tr>
 											<tr>
 												<td>Start Date:</td>
-												<td>August 10, 2017</td>
+												<td contenteditable="true">August 10, 2017</td>
 											</tr>
 											<tr>
 												<td>End Date:</td>
-												<td>September 10, 2017</td>
+												<td contenteditable="true">September 10, 2017</td>
 											</tr>
 											<tr>
 												<td>Files provided:</td>
-												<td>PSD files and front-end markup</td>
+												<td contenteditable="true">PSD files and front-end markup</td>
 											</tr>
 										</tbody>
 									</table>
@@ -103,23 +132,19 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="invoice-top-left">
-										<h2>John Doe</h2>
-										<h3>UI / UX</h3>
-										<h5>Mumbai, India</h5>
+										<h2 contenteditable="true">John Doe</h2>
+										<h3 contenteditable="true">UI / UX</h3>
+										<h5 contenteditable="true">Mumbai, India</h5>
 
 										<h4>Invoice</h4>
-										<h6>September 06, 2017</h6>
+										<h6 contenteditable="true">September 06, 2017</h6>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="invoice-top-right">
-										<h2>Martin Sen</h2>
-										<h3>Hp Solutions</h3>
-										<h5>Delhi, India</h5>
-
-										<!-- <div class="logo-wrapper">
-											<img src="./Acme.png" class="img-responsive pull-right logo" />
-										</div> -->
+										<h2 contenteditable="true">Martin Sen</h2>
+										<h3 contenteditable="true">Hp Solutions</h3>
+										<h5 contenteditable="true">Delhi, India</h5>
 									</div>
 								</div>
 							</div>
@@ -137,25 +162,26 @@
 													<th>TOTAL</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
+											<tbody id="lineBody">
+												<tr class="line-row">
 													<td class="desc">
-														<h3>Web Design</h3>
-														<h5>Design the wireframes and PSD mockups of website.</h5>
+														<h3 contenteditable="true">Web Design</h3>
+														<h5 contenteditable="true">Design the wireframes and PSD mockups of website.</h5>
 													</td>
-													<td><h4>₹50</h4></td>
-													<td><h4>50</h4></td>
-													<td><h4>₹2500</h4></td>
+													<td><h4 class="rate" contenteditable="true">50</h4></td>
+													<td><h4 class="hours" contenteditable="true">50</h4></td>
+													<td><h4 class="amount">₹2500</h4><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
-												<tr>
+												<tr class="line-row">
 													<td class="desc">
-														<h3>Web Development</h3>
-														<h5>Making the responsive website from the PSD file &amp; hosting on server.</h5>
+														<h3 contenteditable="true">Web Development</h3>
+														<h5 contenteditable="true">Making the responsive website from the PSD file &amp; hosting on server.</h5>
 													</td>
-													<td><h4>₹50</h4></td>
-													<td><h4>50</h4></td>
-													<td><h4>₹2500</h4></td>
+													<td><h4 class="rate" contenteditable="true">50</h4></td>
+													<td><h4 class="hours" contenteditable="true">50</h4></td>
+													<td><h4 class="amount">₹2500</h4><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
+												<tr class="add-row"><td colspan="4"><button type="button" class="add-line">+ Add line item</button></td></tr>
 											</tbody>
 										</table>
 									</div>
@@ -166,20 +192,20 @@
 										<div class="col-sm-8 no-padding">
 											<div class="sub-total-box">
 												<h6>SUBTOTAL</h6>
-												<h5>₹5,000</h5>
+												<h5 id="subtotalVal">₹5,000</h5>
 											</div>
 											<div class="add-box">
 												<h3>+</h3>
 											</div>
 											<div class="tax-box">
 												<h6>TAXES</h6>
-												<h5>₹586</h5>
+												<h5 id="taxVal">₹0</h5>
 											</div>
 										</div>
 										<div class="col-sm-4 no-padding">
 											<div class="total-box">
 												<h6>TOTAL</h6>
-												<h3>₹55,866</h3>
+												<h3 id="totalVal">₹5,000</h3>
 											</div>
 										</div>
 									</div>
@@ -189,13 +215,13 @@
 									<hr class="divider">
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-left">johndoe.com</h6>
+									<h6 class="text-left" contenteditable="true">johndoe.com</h6>
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-center">contact@johndoe.com</h6>
+									<h6 class="text-center" contenteditable="true">contact@johndoe.com</h6>
 								</div>
 								<div class="col-sm-4">
-									<h6 class="text-right">+91 8097678988</h6>
+									<h6 class="text-right" contenteditable="true">+91 8097678988</h6>
 								</div>
 							</div>
 							<div class="bottom-bar"></div>
@@ -205,13 +231,183 @@
 			</div>
 		</div>
 	</section>
-	
+
 
 	<!-- jquery slim version 3.2.1 minified -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- ============ Live-editing engine (vanilla JS, no dependencies) ============ -->
+	<script>
+	(function(){
+		"use strict";
+
+		var CURRENCIES = {
+			INR: { locale:'en-IN', code:'INR', mark:'₹' },
+			USD: { locale:'en-US', code:'USD', mark:'$' },
+			EUR: { locale:'en-IE', code:'EUR', mark:'€' },
+			GBP: { locale:'en-GB', code:'GBP', mark:'£' },
+			AED: { locale:'en-AE', code:'AED', mark:'AED ' }
+		};
+		var cur = CURRENCIES.INR;
+
+		var tbody    = document.getElementById('lineBody');
+		var taxInput = document.getElementById('taxPct');
+		var curSel   = document.getElementById('curSel');
+		var proposalCurrency = document.getElementById('proposalCurrency');
+
+		var subtotalVal = document.getElementById('subtotalVal');
+		var taxVal      = document.getElementById('taxVal');
+		var totalVal    = document.getElementById('totalVal');
+
+		function fmt(n){
+			n = n || 0;
+			var nf = cur.nf;
+			if(!nf){
+				try{
+					nf = cur.nf = new Intl.NumberFormat(cur.locale, {
+						style:'currency', currency:cur.code, maximumFractionDigits:2
+					});
+				}catch(e){
+					return n.toFixed(2);
+				}
+			}
+			return nf.format(n);
+		}
+		function parseNum(t){
+			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
+			return isNaN(v) ? 0 : v;
+		}
+		function selectAll(el){
+			setTimeout(function(){
+				var r = document.createRange();
+				r.selectNodeContents(el);
+				var s = window.getSelection();
+				s.removeAllRanges();
+				s.addRange(r);
+			}, 0);
+		}
+
+		function recalc(){
+			var subtotal = 0;
+			Array.prototype.forEach.call(tbody.querySelectorAll('.line-row'), function(r){
+				var rate  = parseNum(r.querySelector('.rate').textContent);
+				var hours = parseNum(r.querySelector('.hours').textContent);
+				var amt   = rate * hours;
+				r.querySelector('.amount').textContent = fmt(amt);
+				subtotal += amt;
+			});
+			var taxPct = Number(taxInput.value);
+			if(!isFinite(taxPct) || taxPct < 0){
+				taxPct = 0;
+				if(taxInput.value !== '') taxInput.value = '0';
+			}
+			var taxAmt = subtotal * taxPct / 100;
+			var total  = subtotal + taxAmt;
+
+			subtotalVal.textContent = fmt(subtotal);
+			taxVal.textContent      = fmt(taxAmt);
+			totalVal.textContent    = fmt(total);
+		}
+
+		// keep the editable RATE cells showing a formatted figure when not focused
+		function reformatRates(){
+			Array.prototype.forEach.call(tbody.querySelectorAll('.rate'), function(c){
+				if(document.activeElement !== c){
+					c.textContent = fmt(parseNum(c.textContent));
+				}
+			});
+		}
+
+		// --- line item editing (event delegation) ---
+		tbody.addEventListener('input', function(e){
+			if(e.target.classList.contains('rate') || e.target.classList.contains('hours')){
+				recalc();
+			}
+		});
+		tbody.addEventListener('focusin', function(e){
+			if(e.target.classList.contains('rate')){
+				var v = parseNum(e.target.textContent);
+				e.target.textContent = v ? String(v) : '';
+				selectAll(e.target);
+			}
+		});
+		tbody.addEventListener('focusout', function(e){
+			if(e.target.classList.contains('rate')){
+				e.target.textContent = fmt(parseNum(e.target.textContent));
+				recalc();
+			}
+		});
+		tbody.addEventListener('click', function(e){
+			if(e.target.classList.contains('add-line')){ addLineItem(); return; }
+			if(!e.target.classList.contains('row-delete')) return;
+			var row = e.target.closest('.line-row');
+			if(tbody.querySelectorAll('.line-row').length > 1){
+				row.parentNode.removeChild(row);
+			}else{
+				row.querySelector('.desc h3').textContent = 'New item';
+				row.querySelector('.desc h5').textContent = '';
+				row.querySelector('.rate').textContent    = fmt(0);
+				row.querySelector('.hours').textContent   = '0';
+			}
+			recalc();
+		});
+
+		// --- add a line item (button lives inside the table) ---
+		function addLineItem(){
+			var anchor = tbody.querySelector('.add-row');
+			var tr = document.createElement('tr');
+			tr.className = 'line-row';
+			tr.innerHTML =
+				'<td class="desc"><h3 contenteditable="true">New item</h3><h5 contenteditable="true">Description</h5></td>' +
+				'<td><h4 class="rate" contenteditable="true">' + fmt(0) + '</h4></td>' +
+				'<td><h4 class="hours" contenteditable="true">0</h4></td>' +
+				'<td><h4 class="amount">' + fmt(0) + '</h4><button type="button" class="row-delete" title="Remove row">&times;</button></td>';
+			tbody.insertBefore(tr, anchor);
+			var title = tr.querySelector('.desc h3');
+			title.focus();
+			selectAll(title);
+			recalc();
+		}
+
+		// --- toolbar ---
+		taxInput.addEventListener('input', recalc);
+		curSel.addEventListener('change', function(){
+			cur = CURRENCIES[curSel.value] || CURRENCIES.INR;
+			proposalCurrency.textContent = cur.mark;
+			reformatRates();
+			recalc();
+		});
+
+		// choose what gets exported: the proposal page, the invoice page, or both
+		var printScope = document.getElementById('printScope');
+		function applyScope(){
+			document.body.classList.remove('print-invoice', 'print-proposal');
+			document.body.classList.add('print-' + printScope.value);
+		}
+		printScope.addEventListener('change', applyScope);
+
+		// Blur any focused cell first so its formatted value (not the raw
+		// editing number) is what lands in the printed/exported PDF.
+		function blurActive(){
+			if(document.activeElement && document.activeElement.blur){
+				document.activeElement.blur();
+			}
+		}
+		window.addEventListener('beforeprint', blurActive);
+		document.getElementById('savePdf').addEventListener('click', function(){
+			blurActive();
+			window.print();
+		});
+
+		// --- init ---
+		applyScope();
+		reformatRates();
+		recalc();
+	})();
+	</script>
 
 </body>
 </html>

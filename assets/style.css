@@ -29,3 +29,34 @@ h1{
 	border-radius: 20px;
 	font-size: 15px;
 }
+
+/* Call-to-action buttons in the "Looking for More?" promo card */
+.promo-btn{
+	display: inline-block;
+	margin: 6px;
+	padding: 12px 30px;
+	border-radius: 25px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 16px;
+	transition: all 0.3s ease;
+}
+.promo-btn:hover, .promo-btn:focus{
+	color: #fff;
+	transform: translateY(-2px);
+}
+.promo-btn--solid{
+	background: #ff6b6b;
+	box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+.promo-btn--solid:hover{
+	box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+.promo-btn--ghost{
+	background: rgba(255, 255, 255, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.promo-btn--ghost:hover{
+	background: rgba(255, 255, 255, 0.25);
+}

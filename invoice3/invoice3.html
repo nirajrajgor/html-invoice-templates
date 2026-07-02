@@ -14,7 +14,7 @@
 	<!-- Custom font montseraat -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
 
-	<!-- Custom style invoice1.css -->
+	<!-- Custom style invoice3.css -->
 	<link rel="stylesheet" type="text/css" href="./invoice3.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,6 +26,28 @@
 </head>
 <body>
 
+	<!-- ============ EDIT BAR — back-nav + controls (screen only) ============ -->
+	<div class="edit-bar">
+		<a class="eb-back" href="../index.html">&larr; Invoice Templates</a>
+		<span class="eb-spacer"></span>
+		<div class="eb-controls">
+			<label>Currency
+				<select id="curSel">
+					<option value="INR">₹ INR</option>
+					<option value="USD">$ USD</option>
+					<option value="EUR">€ EUR</option>
+					<option value="GBP">£ GBP</option>
+					<option value="AED">AED</option>
+				</select>
+			</label>
+			<button type="button" class="eb-btn" id="logoBtn">Upload logo</button>
+			<input type="file" id="logoFile" accept="image/*" hidden>
+		</div>
+		<span class="eb-spacer"></span>
+		<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
+	</div>
+	<p class="edit-hint">✏️ Click any text to edit it — Subtotal, Discount and Total Due update as you type. Hover a service to remove it.</p>
+
 	<section class="invoice">
 		<div class="bg-color"></div>
 		<div class="container">
@@ -36,63 +58,72 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="invoice-top-left">
-										<img src="./acme.png" class="img-responsive logo" />
-										<h1>ACME Design Co.</h1>
-										<h5>Web design for Airbnb homepage</h5>
+										<img src="./Acme.png" id="logoImg" class="img-responsive logo" />
+										<h1 contenteditable="true">ACME Design Co.</h1>
+										<h5 contenteditable="true">Web design for Airbnb homepage</h5>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="invoice-top-right">
 										<h4>INVOICE</h4>
-										<h6>#378928</h6>
-										<h3>Sep 6th, 2017</h3>
-										<h2 class="amount">₹50,000</h2>
+										<h6 contenteditable="true">#378928</h6>
+										<h3 contenteditable="true">Sep 6th, 2017</h3>
+										<h2 class="amount" id="amountVal">₹50,000</h2>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="invoice-bottom">
-							<div class="row">
-								<div class="col-sm-8">
-									<h2 class="service-title">Web Design and UI</h2>
-									<h5 class="service-subtitle">UI design in Photoshop for development.</h5>
+							<div class="service-row">
+								<div class="row">
+									<div class="col-sm-8">
+										<h2 class="service-title" contenteditable="true">Web Design and UI</h2>
+										<h5 class="service-subtitle" contenteditable="true">UI design in Photoshop for development.</h5>
+									</div>
+									<div class="col-sm-4">
+										<h3 class="service-price" contenteditable="true">25000</h3>
+									</div>
 								</div>
-								<div class="col-sm-4">
-									<h3 class="service-price">₹25,000</h3>
-								</div>
+								<button type="button" class="row-delete" title="Remove service">&times;</button>
+								<hr>
 							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-8">
-									<h2 class="service-title">Website Maintenance</h2>
-									<h5 class="service-subtitle">Long term maintenance of website and bug fixes.</h5>
+							<div class="service-row">
+								<div class="row">
+									<div class="col-sm-8">
+										<h2 class="service-title" contenteditable="true">Website Maintenance</h2>
+										<h5 class="service-subtitle" contenteditable="true">Long term maintenance of website and bug fixes.</h5>
+									</div>
+									<div class="col-sm-4">
+										<h3 class="service-price" contenteditable="true">25000</h3>
+										<h6 class="price-info" contenteditable="true">Recurring Price</h6>
+									</div>
 								</div>
-								<div class="col-sm-4">
-									<h3 class="service-price">₹25,000</h3>
-									<h6 class="price-info">Recurring Price</h6>
-								</div>
+								<button type="button" class="row-delete" title="Remove service">&times;</button>
+								<hr>
 							</div>
-							<hr>
+
+							<div class="add-service-wrap"><button type="button" class="add-service">+ Add service</button></div>
+
 							<div class="row">
 								<div class="col-sm-10 col-xs-8">
 									<h4 class="sub-total">SUB TOTAL</h4>
 								</div>
 								<div class="col-sm-2 col-xs-4">
-									<h3 class="sub-total-price">₹50,000</h3>
+									<h3 class="sub-total-price" id="subtotalVal">₹50,000</h3>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-sm-10 col-xs-8">
 									<h4 class="discount">DISCOUNT</h4>
 								</div>
 								<div class="col-sm-2 col-xs-4">
-									<h3 class="discount-price">-₹2,500</h3>
+									<h3 class="discount-price" id="discountVal" contenteditable="true">-₹2,500</h3>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-sm-9 col-xs-8">
 									<h3 class="total-due">TOTAL DUE</h3>
 								</div>
 								<div class="col-sm-3 col-xs-4">
-									<h3 class="total-due-price">₹47,500 Rupees</h3>
+									<h3 class="total-due-price" id="totalDueVal">₹47,500</h3>
 								</div>
 							</div>
 						</div>
@@ -101,8 +132,8 @@
 								<div class="col-md-3">
 									<div class="client-address">
 										<h6>TO</h6>
-										<h2>Airbnb Co.</h2>
-										<h4>
+										<h2 contenteditable="true">Airbnb Co.</h2>
+										<h4 contenteditable="true">
 											189 Fight Street <br>
 											Las Vegas, LV 878 <br>
 											United States <br>
@@ -113,8 +144,8 @@
 								<div class="col-md-3">
 									<div class="our-address">
 										<h6>FROM</h6>
-										<h2>Acme Design Co.</h2>
-										<h4>
+										<h2 contenteditable="true">Acme Design Co.</h2>
+										<h4 contenteditable="true">
 											189 Fight Street <br>
 											Las Vegas, LV 878 <br>
 											United States <br>
@@ -125,17 +156,8 @@
 								<div class="col-md-offset-1 col-md-5">
 									<div class="note">
 										<h6>NOTE</h6>
-										<p>A special note regarding invoice can be written here, as this is tiny place to notify the client.</p>
+										<p contenteditable="true">A special note regarding invoice can be written here, as this is tiny place to notify the client.</p>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div class="payment">
-							<div class="row">
-								<div class="col-xs-12">
-									<h3 class="text-center">
-										<a href="#">PAY NOW</a>
-									</h3>
 								</div>
 							</div>
 						</div>
@@ -150,6 +172,179 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- ============ Live-editing engine (vanilla JS, no dependencies) ============ -->
+	<script>
+	(function(){
+		"use strict";
+
+		var CURRENCIES = {
+			INR: { locale:'en-IN', code:'INR' },
+			USD: { locale:'en-US', code:'USD' },
+			EUR: { locale:'en-IE', code:'EUR' },
+			GBP: { locale:'en-GB', code:'GBP' },
+			AED: { locale:'en-AE', code:'AED' }
+		};
+		var cur = CURRENCIES.INR;
+
+		var bottom     = document.querySelector('.invoice-bottom');
+		var curSel     = document.getElementById('curSel');
+		var amountEl   = document.getElementById('amountVal');
+		var subtotalEl = document.getElementById('subtotalVal');
+		var discountEl = document.getElementById('discountVal');
+		var totalDueEl = document.getElementById('totalDueVal');
+
+		function fmt(n){
+			n = n || 0;
+			var nf = cur.nf;
+			if(!nf){
+				try{
+					nf = cur.nf = new Intl.NumberFormat(cur.locale, {
+						style:'currency', currency:cur.code, maximumFractionDigits:2
+					});
+				}catch(e){
+					return n.toFixed(2);
+				}
+			}
+			return nf.format(n);
+		}
+		function parseNum(t){
+			var v = parseFloat(String(t).replace(/[^0-9.\-]/g, ''));
+			return isNaN(v) ? 0 : v;
+		}
+		function selectAll(el){
+			setTimeout(function(){
+				var r = document.createRange();
+				r.selectNodeContents(el);
+				var s = window.getSelection();
+				s.removeAllRanges();
+				s.addRange(r);
+			}, 0);
+		}
+
+		function recalc(){
+			var subtotal = 0;
+			Array.prototype.forEach.call(bottom.querySelectorAll('.service-row .service-price'), function(c){
+				subtotal += parseNum(c.textContent);
+			});
+			var discount = Math.abs(parseNum(discountEl.textContent));
+			var totalDue = subtotal - discount;
+
+			amountEl.textContent   = fmt(subtotal);
+			subtotalEl.textContent = fmt(subtotal);
+			totalDueEl.textContent = fmt(totalDue);
+		}
+
+		// reformat the editable money cells when they're not being typed in
+		function reformatMoney(){
+			Array.prototype.forEach.call(bottom.querySelectorAll('.service-price'), function(c){
+				if(document.activeElement !== c){ c.textContent = fmt(parseNum(c.textContent)); }
+			});
+			if(document.activeElement !== discountEl){
+				var d = Math.abs(parseNum(discountEl.textContent));
+				discountEl.textContent = (d > 0 ? '-' : '') + fmt(d);
+			}
+		}
+
+		function isMoney(el){
+			return el.classList.contains('service-price') || el === discountEl;
+		}
+
+		// --- editing (event delegation on the invoice body) ---
+		bottom.addEventListener('input', function(e){
+			if(isMoney(e.target)) recalc();
+		});
+		bottom.addEventListener('focusin', function(e){
+			if(isMoney(e.target)){
+				var v = Math.abs(parseNum(e.target.textContent));
+				e.target.textContent = v ? String(v) : '';
+				selectAll(e.target);
+			}
+		});
+		bottom.addEventListener('focusout', function(e){
+			if(e.target.classList.contains('service-price')){
+				e.target.textContent = fmt(parseNum(e.target.textContent));
+				recalc();
+			}else if(e.target === discountEl){
+				var d = Math.abs(parseNum(e.target.textContent));
+				e.target.textContent = (d > 0 ? '-' : '') + fmt(d);
+				recalc();
+			}
+		});
+		bottom.addEventListener('click', function(e){
+			if(e.target.classList.contains('add-service')){ addService(); return; }
+			if(!e.target.classList.contains('row-delete')) return;
+			var row = e.target.closest('.service-row');
+			if(bottom.querySelectorAll('.service-row').length > 1){
+				row.parentNode.removeChild(row);
+			}else{
+				row.querySelector('.service-title').textContent    = 'New service';
+				row.querySelector('.service-subtitle').textContent = '';
+				row.querySelector('.service-price').textContent    = fmt(0);
+				var info = row.querySelector('.price-info');
+				if(info){ info.textContent = ''; }
+			}
+			recalc();
+		});
+
+		// --- add a service row ---
+		function addService(){
+			var anchor = bottom.querySelector('.add-service-wrap');
+			var div = document.createElement('div');
+			div.className = 'service-row';
+			div.innerHTML =
+				'<div class="row">' +
+					'<div class="col-sm-8">' +
+						'<h2 class="service-title" contenteditable="true">New service</h2>' +
+						'<h5 class="service-subtitle" contenteditable="true">Description</h5>' +
+					'</div>' +
+					'<div class="col-sm-4">' +
+						'<h3 class="service-price" contenteditable="true">' + fmt(0) + '</h3>' +
+					'</div>' +
+				'</div>' +
+				'<button type="button" class="row-delete" title="Remove service">&times;</button>' +
+				'<hr>';
+			bottom.insertBefore(div, anchor);
+			var title = div.querySelector('.service-title');
+			title.focus();
+			selectAll(title);
+			recalc();
+		}
+
+		// --- toolbar ---
+		curSel.addEventListener('change', function(){
+			cur = CURRENCIES[curSel.value] || CURRENCIES.INR;
+			reformatMoney();
+			recalc();
+		});
+		document.getElementById('logoBtn').addEventListener('click', function(){
+			document.getElementById('logoFile').click();
+		});
+		document.getElementById('logoFile').addEventListener('change', function(e){
+			var f = e.target.files && e.target.files[0];
+			if(!f) return;
+			var rd = new FileReader();
+			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
+			rd.readAsDataURL(f);
+		});
+		// Blur any focused cell first so its formatted value (not the raw
+		// editing number) is what lands in the printed/exported PDF.
+		function blurActive(){
+			if(document.activeElement && document.activeElement.blur){
+				document.activeElement.blur();
+			}
+		}
+		window.addEventListener('beforeprint', blurActive);
+		document.getElementById('savePdf').addEventListener('click', function(){
+			blurActive();
+			window.print();
+		});
+
+		// --- init ---
+		reformatMoney();
+		recalc();
+	})();
+	</script>
 
 </body>
 </html>
