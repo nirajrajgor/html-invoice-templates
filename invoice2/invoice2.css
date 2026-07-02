@@ -302,4 +302,16 @@ body{
 	   at a time so each is a single clean page */
 	body.print-invoice .front{ display: none !important; }
 	body.print-proposal .back{ display: none !important; }
+
+	/* Bootstrap's sm/md grid needs a ≥768px viewport, but an A4 page prints
+	   narrower — the columns would stack and push the invoice onto a second
+	   page. Re-apply the desktop column widths for print. */
+	.col-sm-4, .col-sm-6, .col-sm-8, .col-sm-10,
+	.col-md-9, .col-md-12{ float: left; }
+	.col-sm-4{ width: 33.33333333%; }
+	.col-sm-6{ width: 50%; }
+	.col-sm-8{ width: 66.66666667%; }
+	.col-sm-10{ width: 83.33333333%; }
+	.col-md-9{ width: 75%; }
+	.col-md-12{ width: 100%; }
 }
