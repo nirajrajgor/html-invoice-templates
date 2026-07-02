@@ -64,6 +64,13 @@ Invoice-top-right refers to the our name & address, logo and date
 	color: rgba(0,0,0,0.75);
 }
 .logo-wrapper{ overflow: auto; }
+.invoice-top-right .logo{
+	width: auto;
+	height: auto;
+	max-width: 240px;
+	max-height: 100px;
+	object-fit: contain;
+}
 
 /*
 Invoice-bottom refers to the bottom part of invoice template
