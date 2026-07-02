@@ -36,7 +36,11 @@ hr{
 }
 
 .invoice-top-left .logo{
-	width: 190px;
+	width: auto;
+	height: auto;
+	max-width: 190px;
+	max-height: 80px;
+	object-fit: contain;
 }
 .invoice-top-left h1{
 	font-size: 24px;

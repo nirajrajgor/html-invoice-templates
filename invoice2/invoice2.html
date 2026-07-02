@@ -94,7 +94,7 @@
 										<tbody>
 											<tr>
 												<td>Rate:</td>
-												<td contenteditable="true">₹50 / hour</td>
+												<td><span id="proposalCurrency">₹</span><span contenteditable="true">50 / hour</span></td>
 											</tr>
 											<tr>
 												<td>Estimated Time:</td>
@@ -245,17 +245,18 @@
 		"use strict";
 
 		var CURRENCIES = {
-			INR: { locale:'en-IN', code:'INR' },
-			USD: { locale:'en-US', code:'USD' },
-			EUR: { locale:'en-IE', code:'EUR' },
-			GBP: { locale:'en-GB', code:'GBP' },
-			AED: { locale:'en-AE', code:'AED' }
+			INR: { locale:'en-IN', code:'INR', mark:'₹' },
+			USD: { locale:'en-US', code:'USD', mark:'$' },
+			EUR: { locale:'en-IE', code:'EUR', mark:'€' },
+			GBP: { locale:'en-GB', code:'GBP', mark:'£' },
+			AED: { locale:'en-AE', code:'AED', mark:'AED ' }
 		};
 		var cur = CURRENCIES.INR;
 
 		var tbody    = document.getElementById('lineBody');
 		var taxInput = document.getElementById('taxPct');
 		var curSel   = document.getElementById('curSel');
+		var proposalCurrency = document.getElementById('proposalCurrency');
 
 		var subtotalVal = document.getElementById('subtotalVal');
 		var taxVal      = document.getElementById('taxVal');
@@ -298,7 +299,11 @@
 				r.querySelector('.amount').textContent = fmt(amt);
 				subtotal += amt;
 			});
-			var taxPct = parseNum(taxInput.value);
+			var taxPct = Number(taxInput.value);
+			if(!isFinite(taxPct) || taxPct < 0){
+				taxPct = 0;
+				if(taxInput.value !== '') taxInput.value = '0';
+			}
 			var taxAmt = subtotal * taxPct / 100;
 			var total  = subtotal + taxAmt;
 
@@ -371,6 +376,7 @@
 		taxInput.addEventListener('input', recalc);
 		curSel.addEventListener('change', function(){
 			cur = CURRENCIES[curSel.value] || CURRENCIES.INR;
+			proposalCurrency.textContent = cur.mark;
 			reformatRates();
 			recalc();
 		});

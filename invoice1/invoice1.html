@@ -235,7 +235,11 @@
 				var price = parseNum(r.querySelector('.price').textContent);
 				subtotal += qty * price;
 			});
-			var taxPct = parseNum(taxInput.value);
+			var taxPct = Number(taxInput.value);
+			if(!isFinite(taxPct) || taxPct < 0){
+				taxPct = 0;
+				if(taxInput.value !== '') taxInput.value = '0';
+			}
 			var taxAmt = subtotal * taxPct / 100;
 			var total  = subtotal + taxAmt;
 
