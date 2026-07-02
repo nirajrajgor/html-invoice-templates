@@ -383,7 +383,16 @@
 		}
 		printScope.addEventListener('change', applyScope);
 
+		// Blur any focused cell first so its formatted value (not the raw
+		// editing number) is what lands in the printed/exported PDF.
+		function blurActive(){
+			if(document.activeElement && document.activeElement.blur){
+				document.activeElement.blur();
+			}
+		}
+		window.addEventListener('beforeprint', blurActive);
 		document.getElementById('savePdf').addEventListener('click', function(){
+			blurActive();
 			window.print();
 		});
 

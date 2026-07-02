@@ -281,6 +281,8 @@
 				row.querySelector('.service-title').textContent    = 'New service';
 				row.querySelector('.service-subtitle').textContent = '';
 				row.querySelector('.service-price').textContent    = fmt(0);
+				var info = row.querySelector('.price-info');
+				if(info){ info.textContent = ''; }
 			}
 			recalc();
 		});
@@ -325,7 +327,16 @@
 			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
 			rd.readAsDataURL(f);
 		});
+		// Blur any focused cell first so its formatted value (not the raw
+		// editing number) is what lands in the printed/exported PDF.
+		function blurActive(){
+			if(document.activeElement && document.activeElement.blur){
+				document.activeElement.blur();
+			}
+		}
+		window.addEventListener('beforeprint', blurActive);
 		document.getElementById('savePdf').addEventListener('click', function(){
+			blurActive();
 			window.print();
 		});
 
