@@ -210,6 +210,9 @@ bottom-bar is colored bar located at bottom of invoice-card
 }
 .line-row:hover .row-delete{ opacity: 1; }
 
+/* --- gap between line items and the totals block --- */
+.spacer-row{ height: 40px; }
+
 /* --- in-table "add line item" control (screen only) --- */
 .add-row td{ border-top: none !important; padding: 6px 8px 0 !important; }
 .add-line{
@@ -244,4 +247,13 @@ bottom-bar is colored bar located at bottom of invoice-card
 
 	/* no drop shadow or screen margin on paper */
 	.invoice-wrapper{ margin: 0 auto; box-shadow: none; }
+
+	/* Tighten vertical spacing so the invoice still fits a single A4 page
+	   when the Subtotal and Tax rows are visible. */
+	.invoice-top{ padding: 28px 60px; }
+	.invoice-bottom{ padding: 28px 60px 40px; }
+	.title{ margin-bottom: 18px; }
+	.spacer-row{ height: 10px; }
+	.terms{ margin-top: 24px; }
+	.divider{ margin-top: 30px; }
 }
