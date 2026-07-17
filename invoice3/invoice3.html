@@ -65,7 +65,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="invoice-top-right">
-										<h4>INVOICE</h4>
+										<h4 contenteditable="true">INVOICE</h4>
 										<h6 contenteditable="true">#378928</h6>
 										<h3 contenteditable="true">Sep 6th, 2017</h3>
 										<h2 class="amount" id="amountVal">₹50,000</h2>
@@ -106,21 +106,21 @@
 
 							<div class="row">
 								<div class="col-sm-10 col-xs-8">
-									<h4 class="sub-total">SUB TOTAL</h4>
+									<h4 class="sub-total" contenteditable="true">SUB TOTAL</h4>
 								</div>
 								<div class="col-sm-2 col-xs-4">
 									<h3 class="sub-total-price" id="subtotalVal">₹50,000</h3>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-sm-10 col-xs-8">
-									<h4 class="discount">DISCOUNT</h4>
+									<h4 class="discount" contenteditable="true">DISCOUNT</h4>
 								</div>
 								<div class="col-sm-2 col-xs-4">
 									<h3 class="discount-price" id="discountVal" contenteditable="true">-₹2,500</h3>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-sm-9 col-xs-8">
-									<h3 class="total-due">TOTAL DUE</h3>
+									<h3 class="total-due" contenteditable="true">TOTAL DUE</h3>
 								</div>
 								<div class="col-sm-3 col-xs-4">
 									<h3 class="total-due-price" id="totalDueVal">₹47,500</h3>
@@ -131,7 +131,7 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="client-address">
-										<h6>TO</h6>
+										<h6 contenteditable="true">TO</h6>
 										<h2 contenteditable="true">Airbnb Co.</h2>
 										<h4 contenteditable="true">
 											189 Fight Street <br>
@@ -143,7 +143,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="our-address">
-										<h6>FROM</h6>
+										<h6 contenteditable="true">FROM</h6>
 										<h2 contenteditable="true">Acme Design Co.</h2>
 										<h4 contenteditable="true">
 											189 Fight Street <br>
@@ -155,7 +155,7 @@
 								</div>
 								<div class="col-md-offset-1 col-md-5">
 									<div class="note">
-										<h6>NOTE</h6>
+										<h6 contenteditable="true">NOTE</h6>
 										<p contenteditable="true">A special note regarding invoice can be written here, as this is tiny place to notify the client.</p>
 									</div>
 								</div>
@@ -327,6 +327,15 @@
 			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
 			rd.readAsDataURL(f);
 		});
+		// Paste as plain text everywhere — pasted rich text would carry its
+		// fonts/colors into the printed PDF.
+		document.addEventListener('paste', function(e){
+			var t = e.target.closest && e.target.closest('[contenteditable="true"]');
+			if(!t) return;
+			e.preventDefault();
+			document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
+		});
+
 		// Blur any focused cell first so its formatted value (not the raw
 		// editing number) is what lands in the printed/exported PDF.
 		function blurActive(){

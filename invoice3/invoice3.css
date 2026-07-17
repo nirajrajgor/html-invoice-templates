@@ -240,9 +240,15 @@ hr{
 [contenteditable="true"]{
 	outline: none; cursor: text; border-radius: 3px;
 	transition: background .15s, box-shadow .15s;
+	word-break: break-word; /* long custom labels wrap instead of escaping their container */
 }
 [contenteditable="true"]:hover{ box-shadow: 0 0 0 1px #cfcfd8 inset; }
 [contenteditable="true"]:focus{ background: #fffbe6; box-shadow: 0 0 0 1px #e0c200 inset; }
+/* an emptied label must stay clickable — keep its line height with a nbsp */
+[contenteditable="true"]:empty::before{ content: "\00a0"; }
+/* uppercase design labels keep their look even if retyped in lowercase */
+.invoice-top-right h4, .sub-total, .discount, .total-due,
+.client-address h6, .our-address h6, .note h6{ text-transform: uppercase; }
 
 /* --- per-service delete control (right gutter) --- */
 .service-row{ position: relative; }
