@@ -272,8 +272,7 @@ body{
 /* an emptied label must stay clickable — keep its line height with a nbsp */
 [contenteditable="true"]:empty::before{ content: "\00a0"; }
 /* uppercase design labels keep their look even if retyped in lowercase */
-.back .table thead th,
-.invoice-bottom-total h6{ text-transform: uppercase; }
+.uc{ text-transform: uppercase; }
 
 /* --- per-row delete control (right gutter, no extra column) --- */
 .line-row td:last-child{ position: relative; }
