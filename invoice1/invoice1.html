@@ -47,7 +47,11 @@
 			<input type="file" id="logoFile" accept="image/*" hidden>
 		</div>
 		<span class="eb-spacer"></span>
-		<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
+		<button type="button" class="eb-btn primary" id="savePdf">Save as PDF</button>
+		<span class="print-tips">
+			<button type="button" class="eb-info" aria-label="Print tips">?</button>
+			<span class="print-tips-pop" role="tooltip">In the print dialog: turn <b>off</b> &ldquo;Headers and footers&rdquo; to hide the date and file path, and turn <b>on</b> &ldquo;Background graphics&rdquo; to keep the design colors. (Option names as in Chrome &mdash; other browsers vary.)</span>
+		</span>
 	</div>
 	<p class="edit-hint">✏️ Click any text to edit it — totals update as you type. Hover a row to remove it.</p>
 
@@ -62,7 +66,7 @@
 									<div class="invoice-top-left">
 										<h2 class="client-company-name" contenteditable="true">Google Inc.</h2>
 										<h6 class="client-address" contenteditable="true">31 Lake Floyd Circle, <br>Delaware, AC 987869 <br>India</h6>
-										<h4>Reference</h4>
+										<h4 contenteditable="true">Reference</h4>
 										<h5 contenteditable="true">UX Design &amp; Development for <br> Android App.</h5>
 									</div>
 								</div>
@@ -81,13 +85,13 @@
 						<div class="invoice-bottom">
 							<div class="row">
 								<div class="col-xs-12">
-									<h2 class="title">Invoice</h2>
+									<h2 class="title" contenteditable="true">Invoice</h2>
 								</div>
 								<div class="clearfix"></div>
 
 								<div class="col-sm-3 col-md-3">
 									<div class="invoice-bottom-left">
-										<h5>Invoice No.</h5>
+										<h5 contenteditable="true">Invoice No.</h5>
 										<h4 contenteditable="true">BJI 009872</h4>
 									</div>
 								</div>
@@ -96,9 +100,9 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>Qty</th>
-													<th>Description</th>
-													<th>Price</th>
+													<th contenteditable="true">Qty</th>
+													<th contenteditable="true">Description</th>
+													<th contenteditable="true">Price</th>
 												</tr>
 											</thead>
 											<tbody id="lineBody">
@@ -118,27 +122,27 @@
 													<td><span class="price" contenteditable="true">&#8377;50,000.00</span><button type="button" class="row-delete" title="Remove row">&times;</button></td>
 												</tr>
 												<tr class="add-row"><td colspan="3"><button type="button" class="add-line">+ Add line item</button></td></tr>
-												<tr style="height: 40px;"></tr>
+												<tr class="spacer-row"></tr>
 											</tbody>
 											<thead class="totals">
 												<tr id="subtotalRow" style="display: none;">
-													<th>Subtotal</th>
+													<th contenteditable="true">Subtotal</th>
 													<th></th>
 													<th id="subtotalVal">&#8377;95,000.00</th>
 												</tr>
 												<tr id="taxRow" style="display: none;">
-													<th>Tax (<span id="taxLabel">0</span>%)</th>
+													<th><span contenteditable="true">Tax</span> (<span id="taxLabel">0</span>%)</th>
 													<th></th>
 													<th id="taxVal">&#8377;0.00</th>
 												</tr>
 												<tr>
-													<th>Total</th>
+													<th contenteditable="true">Total</th>
 													<th></th>
 													<th id="totalVal">&#8377;95,000.00</th>
 												</tr>
 											</thead>
 										</table>
-										<h4 class="terms">Terms</h4>
+										<h4 class="terms" contenteditable="true">Terms</h4>
 										<ul>
 											<li contenteditable="true">Invoice to be paid in advance.</li>
 											<li contenteditable="true">Make payment in 2,3 business days.</li>
@@ -330,6 +334,15 @@
 			var rd = new FileReader();
 			rd.onload = function(ev){ document.getElementById('logoImg').src = ev.target.result; };
 			rd.readAsDataURL(f);
+		});
+
+		// Paste as plain text everywhere — pasted rich text would carry its
+		// fonts/colors into the printed PDF.
+		document.addEventListener('paste', function(e){
+			var t = e.target.closest && e.target.closest('[contenteditable="true"]');
+			if(!t) return;
+			e.preventDefault();
+			document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
 		});
 
 		// Blur any focused cell first so its formatted value (not the raw

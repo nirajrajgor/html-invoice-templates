@@ -177,6 +177,27 @@ bottom-bar is colored bar located at bottom of invoice-card
 .eb-btn.primary:hover{ background: #f0f0f5; }
 .eb-btn:active{ transform: translateY(1px); }
 
+/* --- print-tips popover: points out the browser print-dialog options --- */
+.print-tips{ position: relative; display: inline-flex; align-items: center; }
+.eb-info{
+	width: 22px; height: 22px; padding: 0;
+	display: inline-flex; align-items: center; justify-content: center;
+	font-family: inherit; font-size: 12px; font-weight: 700; cursor: help;
+	color: #d7d7e0; background: transparent;
+	border: 1px solid rgba(255,255,255,0.6); border-radius: 50%;
+}
+.eb-info:hover, .eb-info:focus{ color: #fff; border-color: #fff; outline: none; }
+.print-tips-pop{
+	display: none;
+	position: absolute; top: calc(100% + 12px); right: 0;
+	width: 270px; padding: 10px 12px;
+	font-size: 12px; font-weight: 400; line-height: 1.5; text-align: left;
+	color: #323149; background: #fff; border-radius: 6px;
+	box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+.print-tips:hover .print-tips-pop,
+.eb-info:focus + .print-tips-pop{ display: block; }
+
 /* --- "this is editable" hint strip --- */
 .edit-hint{
 	margin: 0;
@@ -193,9 +214,15 @@ bottom-bar is colored bar located at bottom of invoice-card
 [contenteditable="true"]{
 	outline: none; cursor: text; border-radius: 3px;
 	transition: background .15s, box-shadow .15s;
+	word-break: break-word; /* long custom labels wrap instead of escaping their container */
 }
 [contenteditable="true"]:hover{ box-shadow: 0 0 0 1px #cfcfd8 inset; }
 [contenteditable="true"]:focus{ background: #fffbe6; box-shadow: 0 0 0 1px #e0c200 inset; }
+/* an emptied label must stay clickable — keep its line height with a nbsp */
+[contenteditable="true"]:empty::before{ content: "\00a0"; }
+/* numeric cells: the label wrap guard above must not split quantities or
+   currency values mid-number when a long header squeezes the columns */
+.qty, .price{ white-space: nowrap; }
 
 /* --- per-row delete control (right gutter, no extra column) --- */
 .line-row td:last-child{ position: relative; }
@@ -206,6 +233,9 @@ bottom-bar is colored bar located at bottom of invoice-card
 	font-size: 13px; cursor: pointer; opacity: 0; transition: opacity .15s;
 }
 .line-row:hover .row-delete{ opacity: 1; }
+
+/* --- gap between line items and the totals block --- */
+.spacer-row{ height: 40px; }
 
 /* --- in-table "add line item" control (screen only) --- */
 .add-row td{ border-top: none !important; padding: 6px 8px 0 !important; }
@@ -241,4 +271,14 @@ bottom-bar is colored bar located at bottom of invoice-card
 
 	/* no drop shadow or screen margin on paper */
 	.invoice-wrapper{ margin: 0 auto; box-shadow: none; }
+
+	/* Tighten vertical spacing so the invoice fits a single page — including
+	   US Letter, which is ~66px shorter than A4 — with the Subtotal and Tax
+	   rows visible and headroom for a renamed label wrapping to extra lines. */
+	.invoice-top{ padding: 22px 60px; }
+	.invoice-bottom{ padding: 22px 60px 28px; }
+	.title{ margin-bottom: 12px; }
+	.spacer-row{ height: 8px; }
+	.terms{ margin-top: 16px; }
+	.divider{ margin-top: 22px; }
 }

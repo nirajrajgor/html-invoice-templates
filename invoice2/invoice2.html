@@ -51,7 +51,11 @@
 			</label>
 		</div>
 		<span class="eb-spacer"></span>
-		<button type="button" class="eb-btn primary" id="savePdf">💾 Save as PDF</button>
+		<button type="button" class="eb-btn primary" id="savePdf">Save as PDF</button>
+		<span class="print-tips">
+			<button type="button" class="eb-info" aria-label="Print tips">?</button>
+			<span class="print-tips-pop" role="tooltip">In the print dialog: turn <b>off</b> &ldquo;Headers and footers&rdquo; to hide the date and file path, and turn <b>on</b> &ldquo;Background graphics&rdquo; to keep the design colors. (Option names as in Chrome &mdash; other browsers vary.)</span>
+		</span>
 	</div>
 	<p class="edit-hint">✏️ Click any text to edit it — Rate × Hours and totals update as you type. Hover a row to remove it.</p>
 
@@ -93,23 +97,23 @@
 									<table class="table borderless custom-table">
 										<tbody>
 											<tr>
-												<td>Rate:</td>
+												<td contenteditable="true">Rate:</td>
 												<td><span id="proposalCurrency">₹</span><span contenteditable="true">50 / hour</span></td>
 											</tr>
 											<tr>
-												<td>Estimated Time:</td>
+												<td contenteditable="true">Estimated Time:</td>
 												<td contenteditable="true">100 hours</td>
 											</tr>
 											<tr>
-												<td>Start Date:</td>
+												<td contenteditable="true">Start Date:</td>
 												<td contenteditable="true">August 10, 2017</td>
 											</tr>
 											<tr>
-												<td>End Date:</td>
+												<td contenteditable="true">End Date:</td>
 												<td contenteditable="true">September 10, 2017</td>
 											</tr>
 											<tr>
-												<td>Files provided:</td>
+												<td contenteditable="true">Files provided:</td>
 												<td contenteditable="true">PSD files and front-end markup</td>
 											</tr>
 										</tbody>
@@ -136,7 +140,7 @@
 										<h3 contenteditable="true">UI / UX</h3>
 										<h5 contenteditable="true">Mumbai, India</h5>
 
-										<h4>Invoice</h4>
+										<h4 contenteditable="true">Invoice</h4>
 										<h6 contenteditable="true">September 06, 2017</h6>
 									</div>
 								</div>
@@ -156,10 +160,10 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>TASK DESCRIPTION</th>
-													<th>RATE</th>
-													<th>HOURS</th>
-													<th>TOTAL</th>
+													<th class="uc" contenteditable="true">TASK DESCRIPTION</th>
+													<th class="uc" contenteditable="true">RATE</th>
+													<th class="uc" contenteditable="true">HOURS</th>
+													<th class="uc" contenteditable="true">TOTAL</th>
 												</tr>
 											</thead>
 											<tbody id="lineBody">
@@ -191,20 +195,20 @@
 									<div class="invoice-bottom-total">
 										<div class="col-sm-8 no-padding">
 											<div class="sub-total-box">
-												<h6>SUBTOTAL</h6>
+												<h6 class="uc" contenteditable="true">SUBTOTAL</h6>
 												<h5 id="subtotalVal">₹5,000</h5>
 											</div>
 											<div class="add-box">
 												<h3>+</h3>
 											</div>
 											<div class="tax-box">
-												<h6>TAXES</h6>
+												<h6 class="uc" contenteditable="true">TAXES</h6>
 												<h5 id="taxVal">₹0</h5>
 											</div>
 										</div>
 										<div class="col-sm-4 no-padding">
 											<div class="total-box">
-												<h6>TOTAL</h6>
+												<h6 class="uc" contenteditable="true">TOTAL</h6>
 												<h3 id="totalVal">₹5,000</h3>
 											</div>
 										</div>
@@ -388,6 +392,15 @@
 			document.body.classList.add('print-' + printScope.value);
 		}
 		printScope.addEventListener('change', applyScope);
+
+		// Paste as plain text everywhere — pasted rich text would carry its
+		// fonts/colors into the printed PDF.
+		document.addEventListener('paste', function(e){
+			var t = e.target.closest && e.target.closest('[contenteditable="true"]');
+			if(!t) return;
+			e.preventDefault();
+			document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
+		});
 
 		// Blur any focused cell first so its formatted value (not the raw
 		// editing number) is what lands in the printed/exported PDF.
