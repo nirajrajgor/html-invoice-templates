@@ -121,6 +121,9 @@ hr{
 	font-size: 18px;
 	text-align: right;
 }
+/* money values stay on one line and never break mid-number (the discount's
+   leading "-" and the editable fields' word-break are both wrap opportunities) */
+.service-price, .sub-total-price, .discount-price, .total-due-price{ white-space: nowrap; }
 
 .footer{
 	background-color: #fafafa;
@@ -297,10 +300,6 @@ hr{
 	.footer .col-md-3{ width: 30%; }
 	.footer .col-md-5{ width: 40%; }
 	.footer .col-md-offset-1{ margin-left: 0; }
-
-	/* keep money values on one line (the discount's leading "-" is a
-	   line-break opportunity and wraps in the narrower print columns) */
-	.sub-total-price, .discount-price, .total-due-price{ white-space: nowrap; }
 
 	/* the 100px top margin is screen decoration (purple band) — on paper it
 	   pushes the footer onto a second page */

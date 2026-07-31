@@ -199,6 +199,9 @@ bottom-bar is colored bar located at bottom of invoice-card
 [contenteditable="true"]:focus{ background: #fffbe6; box-shadow: 0 0 0 1px #e0c200 inset; }
 /* an emptied label must stay clickable — keep its line height with a nbsp */
 [contenteditable="true"]:empty::before{ content: "\00a0"; }
+/* numeric cells: the label wrap guard above must not split quantities or
+   currency values mid-number when a long header squeezes the columns */
+.qty, .price{ white-space: nowrap; }
 
 /* --- per-row delete control (right gutter, no extra column) --- */
 .line-row td:last-child{ position: relative; }
@@ -248,12 +251,13 @@ bottom-bar is colored bar located at bottom of invoice-card
 	/* no drop shadow or screen margin on paper */
 	.invoice-wrapper{ margin: 0 auto; box-shadow: none; }
 
-	/* Tighten vertical spacing so the invoice still fits a single A4 page
-	   when the Subtotal and Tax rows are visible. */
-	.invoice-top{ padding: 28px 60px; }
-	.invoice-bottom{ padding: 28px 60px 40px; }
-	.title{ margin-bottom: 18px; }
-	.spacer-row{ height: 10px; }
-	.terms{ margin-top: 24px; }
-	.divider{ margin-top: 30px; }
+	/* Tighten vertical spacing so the invoice fits a single page — including
+	   US Letter, which is ~66px shorter than A4 — with the Subtotal and Tax
+	   rows visible and headroom for a renamed label wrapping to extra lines. */
+	.invoice-top{ padding: 22px 60px; }
+	.invoice-bottom{ padding: 22px 60px 28px; }
+	.title{ margin-bottom: 12px; }
+	.spacer-row{ height: 8px; }
+	.terms{ margin-top: 16px; }
+	.divider{ margin-top: 22px; }
 }
